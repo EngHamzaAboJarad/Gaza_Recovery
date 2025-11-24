@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تفاصيل البرنامج - مبادرة إعمار غزة</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Cairo", sans-serif;
+      }
+
+      .hero-gradient {
+        background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+      }
+
+      .pattern-dots {
+        background-image: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 1px,
+          transparent 1px
+        );
+        background-size: 20px 20px;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes scaleIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes progressBar {
+        from {
+          width: 0;
+        }
+      }
+
+      .animate-fadeInUp {
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+
+      .animate-slideInLeft {
+        animation: slideInLeft 0.8s ease-out forwards;
+      }
+
+      .animate-slideInRight {
+        animation: slideInRight 0.8s ease-out forwards;
+      }
+
+      .animate-scaleIn {
+        animation: scaleIn 0.6s ease-out forwards;
+      }
+
+      .animate-progress {
+        animation: progressBar 2s ease-out forwards;
+        transition: width 2s ease-out;
+      }
+
+      @keyframes progressBar {
+        0% {
+          width: 0;
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      /* Progress bar pulse effect */
+      .progress-pulse {
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.8;
+        }
+      }
+
+      .stagger-item {
+        opacity: 0;
+      }
+
+      .stagger-item.visible {
+        animation: fadeInUp 0.6s ease-out forwards;
+      }
+
+      .impact-card {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .impact-card.visible {
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+
+      /* Icon animations */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .icon-float {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      /* Scroll animations */
+      .scroll-fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .scroll-fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Loading skeleton */
+      .skeleton {
+        background: linear-gradient(
+          90deg,
+          #e0e0e0 25%,
+          #f0f0f0 50%,
+          #e0e0e0 75%
+        );
+        background-size: 200% 100%;
+        animation: loading 1.2s ease-in-out infinite;
+        border-radius: 8px;
+      }
+
+      @keyframes loading {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+
+      /* Enhanced card styles */
+      .info-card {
+        transition: all 0.3s ease;
+      }
+
+      /* Program color gradients */
+      .phase-icon-red {
+        background: linear-gradient(to bottom right, #fee2e2, #fecaca);
+      }
+      .phase-icon-orange {
+        background: linear-gradient(to bottom right, #ffedd5, #fed7aa);
+      }
+      .phase-icon-blue {
+        background: linear-gradient(to bottom right, #dbeafe, #bfdbfe);
+      }
+      .phase-icon-green {
+        background: linear-gradient(to bottom right, #d1fae5, #a7f3d0);
+      }
+      .phase-icon-yellow {
+        background: linear-gradient(to bottom right, #fef3c7, #fde68a);
+      }
+      .phase-icon-purple {
+        background: linear-gradient(to bottom right, #e9d5ff, #d8b4fe);
+      }
+
+      .feature-icon-red {
+        background: linear-gradient(to bottom right, #fee2e2, #fecaca);
+      }
+      .feature-icon-orange {
+        background: linear-gradient(to bottom right, #ffedd5, #fed7aa);
+      }
+      .feature-icon-blue {
+        background: linear-gradient(to bottom right, #dbeafe, #bfdbfe);
+      }
+      .feature-icon-green {
+        background: linear-gradient(to bottom right, #d1fae5, #a7f3d0);
+      }
+      .feature-icon-yellow {
+        background: linear-gradient(to bottom right, #fef3c7, #fde68a);
+      }
+      .feature-icon-purple {
+        background: linear-gradient(to bottom right, #e9d5ff, #d8b4fe);
+      }
+
+      .impact-bg-red {
+        background: linear-gradient(to bottom right, #fee2e2, #fecaca);
+      }
+      .impact-bg-orange {
+        background: linear-gradient(to bottom right, #ffedd5, #fed7aa);
+      }
+      .impact-bg-blue {
+        background: linear-gradient(to bottom right, #dbeafe, #bfdbfe);
+      }
+      .impact-bg-green {
+        background: linear-gradient(to bottom right, #d1fae5, #a7f3d0);
+      }
+      .impact-bg-yellow {
+        background: linear-gradient(to bottom right, #fef3c7, #fde68a);
+      }
+      .impact-bg-purple {
+        background: linear-gradient(to bottom right, #e9d5ff, #d8b4fe);
+      }
+
+      /* Nav dropdown styles - Full width */
+      .nav-dropdown {
+        position: fixed;
+        top: 5rem;
+        left: 0;
+        right: 0;
+        width: 100%;
+        transform: translateY(-10px);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        z-index: 40;
+      }
+
+      .nav-item:hover .nav-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .nav-item:hover .nav-dropdown,
+      .nav-dropdown:hover {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      @media (max-width: 1023px) {
+        .nav-dropdown {
+          display: none !important;
+        }
+      }
+
+      .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Phase card animation */
+      .phase-card {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+
+      .phase-card.visible {
+        animation: slideInRight 0.6s ease-out forwards;
+      }
+
+      @keyframes slideInRight {
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav
+      id="navbar"
+      class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-md transition-all duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <!-- Logo -->
+          <div class="flex-shrink-0">
+            <a
+              href="index.html"
+              class="inline-flex items-center gap-3 hover:opacity-80 transition-all duration-300 group"
+            >
+              <div class="relative overflow-hidden rounded-full">
+                <img
+                  src="assets/logo.png"
+                  alt="Gaza Recovery Logo"
+                  class="h-12 w-auto drop-shadow-lg transition-all duration-300 group-hover:scale-110 mix-blend-multiply"
+                />
+              </div>
+              <span
+                class="text-lg font-bold bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent"
+                >مبادرة إعمار غزة</span
+              >
+            </a>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden lg:flex lg:items-center lg:space-x-2">
+            <div class="nav-item relative">
+              <a
+                href="index.html"
+                class="nav-link text-gray-700 hover:text-teal-600 transition-colors px-4 py-2 text-sm font-medium rounded-lg hover:bg-teal-50"
+                >الرئيسية</a
+              >
+            </div>
+            <div class="nav-item relative">
+              <a
+                href="programs.html"
+                class="nav-link text-teal-600 font-bold px-4 py-2 text-sm rounded-lg bg-teal-50"
+                >البرامج</a
+              >
+            </div>
+            <div class="nav-item relative">
+              <a
+                href="index.html#impact"
+                class="nav-link text-gray-700 hover:text-teal-600 transition-colors px-4 py-2 text-sm font-medium rounded-lg hover:bg-teal-50"
+                >التأثير</a
+              >
+            </div>
+            <div class="nav-item relative">
+              <a
+                href="index.html#contact"
+                class="nav-link text-gray-700 hover:text-teal-600 transition-colors px-4 py-2 text-sm font-medium rounded-lg hover:bg-teal-50"
+                >اتصل بنا</a
+              >
+            </div>
+            <a
+              href="index.html#donate"
+              class="bg-gradient-to-r from-teal-500 to-emerald-600 text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all ml-4"
+              >تبرع الآن</a
+            >
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="lg:hidden">
+            <button
+              id="mobile-menu-button"
+              type="button"
+              class="text-gray-700 hover:text-teal-600 focus:outline-none p-2 rounded-lg transition-all"
+            >
+              <svg
+                class="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  id="menu-icon"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+                <path
+                  id="close-icon"
+                  class="hidden"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div
+        id="mobile-menu"
+        class="hidden lg:hidden bg-white border-t border-gray-200 shadow-lg"
+      >
+        <div class="px-4 pt-2 pb-3 space-y-1">
+          <a
+            href="index.html"
+            class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
+            >الرئيسية</a
+          >
+          <a
+            href="programs.html"
+            class="block px-4 py-3 rounded-lg text-base font-bold text-teal-600 bg-teal-50"
+            >البرامج</a
+          >
+          <a
+            href="index.html#impact"
+            class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
+            >التأثير</a
+          >
+          <a
+            href="index.html#contact"
+            class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
+            >اتصل بنا</a
+          >
+          <a
+            href="index.html#donate"
+            class="block px-4 py-3 rounded-lg text-base font-bold bg-gradient-to-r from-teal-500 to-emerald-600 text-white text-center"
+            >تبرع الآن</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="heroSection" class="hero-gradient pattern-dots py-20">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center text-white">
+          <!-- Icon -->
+          <div
+            id="heroIcon"
+            class="w-24 h-24 mx-auto mb-6 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-5xl icon-float animate-scaleIn skeleton"
+          ></div>
+
+          <!-- Title -->
+          <h1
+            id="heroTitle"
+            class="text-5xl font-black mb-4 animate-fadeInUp skeleton h-12 w-3/4 mx-auto mb-6 rounded"
+          ></h1>
+
+          <!-- Status Badge -->
+          <div
+            id="heroStatus"
+            class="mb-6 animate-fadeInUp skeleton h-8 w-32 mx-auto rounded-full"
+            style="animation-delay: 0.2s"
+          ></div>
+
+          <!-- Description -->
+          <p
+            id="heroDescription"
+            class="text-xl leading-relaxed opacity-95 animate-fadeInUp skeleton h-20 w-full rounded"
+            style="animation-delay: 0.4s"
+          ></p>
+
+          <!-- Quick Stats -->
+          <div
+            id="quickStats"
+            class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12"
+          >
+            <!-- Will be populated dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Progress Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <div
+            class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl shadow-xl p-8 scroll-fade-in"
+          >
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">
+              تقدم البرنامج
+            </h2>
+            <div class="flex items-center gap-6">
+              <div class="flex-1">
+                <div class="flex justify-between items-center mb-3">
+                  <span class="text-lg font-semibold text-gray-700"
+                    >نسبة الإنجاز</span
+                  >
+                  <span
+                    id="progressPercent"
+                    class="text-2xl font-bold text-teal-600"
+                    >0%</span
+                  >
+                </div>
+                <div class="h-6 bg-gray-200 rounded-full overflow-hidden">
+                  <div
+                    id="progressBar"
+                    class="h-full rounded-full animate-progress"
+                    style="width: 0"
+                  ></div>
+                </div>
+              </div>
+              <div
+                id="progressIcon"
+                class="text-6xl animate-scaleIn"
+                style="animation-delay: 0.5s"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Info Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <h2
+            class="text-4xl font-black text-gray-900 mb-12 text-center scroll-fade-in"
+          >
+            معلومات المشروع
+          </h2>
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Donor Card -->
+            <div
+              class="info-card bg-gradient-to-br from-teal-50 to-emerald-50 rounded-2xl p-8 border-2 border-teal-200 scroll-fade-in shadow-lg"
+            >
+              <div class="flex items-center gap-4 mb-4">
+                <div
+                  class="w-16 h-16 bg-gradient-to-br from-teal-500 to-emerald-500 rounded-full flex items-center justify-center text-3xl shadow-md"
+                >
+                  🤝
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900">الجهة المانحة</h3>
+                  <p
+                    id="donorName"
+                    class="text-teal-700 font-bold text-2xl mt-2"
+                  >
+                    -
+                  </p>
+                </div>
+              </div>
+              <p class="text-gray-600 text-sm mt-4">
+                الشريك الاستراتيجي في تمويل هذا المشروع
+              </p>
+            </div>
+
+            <!-- Budget Card -->
+            <div
+              class="info-card bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 border-2 border-blue-200 scroll-fade-in shadow-lg"
+            >
+              <div class="flex items-center gap-4 mb-4">
+                <div
+                  class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-3xl shadow-md"
+                >
+                  💰
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900">قيمة المشروع</h3>
+                  <p
+                    id="budgetAmount"
+                    class="text-blue-700 font-bold text-2xl mt-2"
+                  >
+                    -
+                  </p>
+                </div>
+              </div>
+              <p class="text-gray-600 text-sm mt-4">
+                إجمالي الميزانية المخصصة للمشروع
+              </p>
+            </div>
+
+            <!-- Duration Card -->
+            <div
+              class="info-card bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-8 border-2 border-purple-200 scroll-fade-in shadow-lg"
+            >
+              <div class="flex items-center gap-4 mb-4">
+                <div
+                  class="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-full flex items-center justify-center text-3xl shadow-md"
+                >
+                  ⏱️
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900">مدة التنفيذ</h3>
+                  <p
+                    id="durationInfo"
+                    class="text-purple-700 font-bold text-2xl mt-2"
+                  >
+                    -
+                  </p>
+                  <p
+                    id="dateRange"
+                    class="text-gray-600 text-sm mt-1 font-semibold"
+                  >
+                    -
+                  </p>
+                </div>
+              </div>
+              <p class="text-gray-600 text-sm mt-4">
+                الفترة الزمنية الكاملة للمشروع
+              </p>
+            </div>
+
+            <!-- Beneficiaries Card -->
+            <div
+              class="info-card bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 border-2 border-green-200 scroll-fade-in shadow-lg"
+            >
+              <div class="flex items-center gap-4 mb-4">
+                <div
+                  class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-3xl shadow-md"
+                >
+                  👥
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900">المستفيدون</h3>
+                  <p
+                    id="beneficiariesCount"
+                    class="text-green-700 font-bold text-2xl mt-2"
+                  >
+                    -
+                  </p>
+                  <p
+                    id="beneficiariesProgress"
+                    class="text-gray-600 text-sm mt-1 font-semibold"
+                  >
+                    -
+                  </p>
+                </div>
+              </div>
+              <p class="text-gray-600 text-sm mt-4">
+                عدد الأشخاص المستفيدين من المشروع
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Execution Plan Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <h2
+            class="text-4xl font-black text-gray-900 mb-12 text-center scroll-fade-in"
+          >
+            خطة التنفيذ
+          </h2>
+          <div id="executionPlan" class="space-y-8">
+            <!-- Will be populated dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <h2
+            class="text-4xl font-black text-gray-900 mb-12 text-center scroll-fade-in"
+          >
+            مميزات البرنامج
+          </h2>
+          <div id="featuresGrid" class="grid md:grid-cols-2 gap-6">
+            <!-- Will be populated dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Challenges and Achievements -->
+    <section class="py-16 bg-gradient-to-br from-gray-50 to-teal-50">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Challenges -->
+            <div class="scroll-fade-in">
+              <h2 class="text-3xl font-black text-gray-900 mb-6">التحديات</h2>
+              <div id="challengesList" class="space-y-4">
+                <!-- Will be populated dynamically -->
+              </div>
+            </div>
+
+            <!-- Achievements -->
+            <div class="scroll-fade-in">
+              <h2 class="text-3xl font-black text-gray-900 mb-6">الإنجازات</h2>
+              <div id="achievementsList" class="space-y-4">
+                <!-- Will be populated dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact Statistics -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <h2
+            class="text-4xl font-black text-gray-900 mb-12 text-center scroll-fade-in"
+          >
+            الأثر المحقق
+          </h2>
+          <div id="impactGrid" class="grid md:grid-cols-3 gap-8">
+            <!-- Will be populated dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 hero-gradient pattern-dots">
+      <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center text-white">
+          <h2 class="text-4xl font-black mb-6 scroll-fade-in">
+            كن جزءًا من التغيير
+          </h2>
+          <p class="text-xl mb-8 opacity-95 scroll-fade-in">
+            تبرعك يساعدنا على مواصلة هذا البرنامج الحيوي ودعم المزيد من العائلات
+          </p>
+          <div class="flex flex-wrap gap-4 justify-center scroll-fade-in">
+            <a
+              href="index.html#donate"
+              class="bg-white text-teal-600 px-8 py-4 rounded-lg font-bold text-lg hover:shadow-2xl transition-all transform hover:scale-105"
+            >
+              تبرع لهذا البرنامج
+            </a>
+            <a
+              href="programs.html"
+              class="bg-white/20 backdrop-blur-sm border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/30 transition-all"
+            >
+              عرض جميع البرامج
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+          <div class="flex items-center gap-3 mb-6 md:mb-0">
+            <img
+              src="assets/img/logo.png"
+              alt="Gaza Recovery Logo"
+              class="h-12 w-12"
+            />
+            <span class="text-2xl font-bold text-white">مبادرة إعمار غزة</span>
+          </div>
+          <div class="flex gap-8">
+            <a href="index.html" class="hover:text-teal-400 transition-colors"
+              >الرئيسية</a
+            >
+            <a
+              href="programs.html"
+              class="hover:text-teal-400 transition-colors"
+              >برامجنا</a
+            >
+            <a
+              href="index.html#about"
+              class="hover:text-teal-400 transition-colors"
+              >من نحن</a
+            >
+            <a
+              href="index.html#donate"
+              class="hover:text-teal-400 transition-colors"
+              >تبرع</a
+            >
+          </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p class="text-gray-400">
+            © 2024 مبادرة إعمار غزة. جميع الحقوق محفوظة.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Programs Data
+      const programsData = {
+        1: {
+          id: 1,
+          icon: "🏥",
+          iconBg: "from-red-100 to-pink-100",
+          iconColor: "text-red-600",
+          title: "الرعاية الصحية والخدمات الطبية",
+          description:
+            "برنامج شامل لتوفير الرعاية الطبية الأساسية والعيادات المتنقلة وخدمات الصحة الطارئة للمجتمعات المتضررة في قطاع غزة.",
+          donor: "منظمة الصحة العالمية WHO",
+          budget: "$2,500,000",
+          duration: "24 شهر",
+          startDate: "يناير 2024",
+          endDate: "ديسمبر 2025",
+          targetBeneficiaries: "15,000",
+          currentBeneficiaries: "12,750",
+          executionPlan: [
+            {
+              phase: "المرحلة الأولى - التحضير والتجهيز",
+              duration: "3 أشهر",
+              activities: [
+                "شراء وتجهيز 15 عيادة متنقلة بالمعدات الطبية",
+                "توظيف وتدريب 50 كادر طبي متخصص",
+                "إنشاء قاعدة بيانات للمرضى والحالات الطارئة",
+                "التنسيق مع وزارة الصحة والمستشفيات المحلية",
+              ],
+            },
+            {
+              phase: "المرحلة الثانية - التنفيذ الميداني",
+              duration: "18 شهر",
+              activities: [
+                "تشغيل العيادات المتنقلة في 5 مناطق رئيسية",
+                "توفير 50,000+ وصفة طبية وأدوية مجانية",
+                "إجراء 30,000+ استشارة طبية متخصصة",
+                "تقديم خدمات الصحة النفسية لـ 5,000 مستفيد",
+              ],
+            },
+            {
+              phase: "المرحلة الثالثة - المتابعة والتقييم",
+              duration: "3 أشهر",
+              activities: [
+                "تقييم جودة الخدمات المقدمة ورضا المستفيدين",
+                "إعداد تقارير شاملة عن الإنجازات والتحديات",
+                "نقل المعرفة وتدريب الكوادر المحلية",
+                "وضع خطة استدامة طويلة الأمد",
+              ],
+            },
+          ],
+          details: [
+            "عيادات صحية متنقلة مجهزة بالكامل",
+            "رعاية طبية طارئة على مدار الساعة",
+            "توزيع الأدوية المجانية للأمراض المزمنة",
+            "دعم الصحة النفسية والاجتماعية",
+            "برامج التوعية الصحية المجتمعية",
+            "خدمات الأمومة والطفولة",
+          ],
+          stats: {
+            beneficiaries: "15,000+",
+            status: "نشط",
+            coverage: "5 مناطق",
+          },
+          progress: 85,
+          color: "red",
+          impact: [
+            {
+              icon: "👨‍⚕️",
+              number: "50+",
+              label: "كادر طبي متخصص",
+            },
+            {
+              icon: "🏥",
+              number: "15",
+              label: "عيادة متنقلة",
+            },
+            {
+              icon: "💊",
+              number: "50,000+",
+              label: "وصفة طبية مجانية",
+            },
+          ],
+          challenges: [
+            "نقص الإمدادات الطبية بسبب الحصار",
+            "صعوبة الوصول لبعض المناطق النائية",
+            "الحاجة لمزيد من الكوادر المتخصصة",
+          ],
+          achievements: [
+            "خفض معدل الوفيات للأطفال بنسبة 30%",
+            "علاج 12,000+ حالة مرضية بنجاح",
+            "تدريب 25 ممرض محلي على الرعاية الطارئة",
+          ],
+        },
+        2: {
+          id: 2,
+          icon: "🏠",
+          iconBg: "from-orange-100 to-amber-100",
+          iconColor: "text-orange-600",
+          title: "إعادة بناء المنازل",
+          description:
+            "مشروع إعادة إعمار شامل لبناء وترميم المنازل المدمرة وتوفير المأوى الآمن للعائلات النازحة.",
+          donor: "الهلال الأحمر القطري",
+          budget: "$5,000,000",
+          duration: "36 شهر",
+          startDate: "مارس 2024",
+          endDate: "فبراير 2027",
+          targetBeneficiaries: "10,000",
+          currentBeneficiaries: "7,800",
+          executionPlan: [
+            {
+              phase: "المرحلة الأولى - المسح والتخطيط",
+              duration: "6 أشهر",
+              activities: [
+                "مسح ميداني شامل للمنازل المتضررة",
+                "تقييم الأضرار وتصنيف حالات الأولوية",
+                "إعداد التصاميم الهندسية والمخططات",
+                "الحصول على التراخيص والموافقات اللازمة",
+              ],
+            },
+            {
+              phase: "المرحلة الثانية - البناء وإعادة الإعمار",
+              duration: "24 شهر",
+              activities: [
+                "إعادة بناء 500 منزل مدمر كلياً",
+                "ترميم وإصلاح 300 منزل متضرر جزئياً",
+                "توفير 200 وحدة سكنية مؤقتة للحالات الطارئة",
+                "تركيب البنية التحتية (ماء، كهرباء، صرف صحي)",
+              ],
+            },
+            {
+              phase: "المرحلة الثالثة - التسليم والمتابعة",
+              duration: "6 أشهر",
+              activities: [
+                "تسليم المنازل للعائلات المستحقة",
+                "توفير الأثاث والأدوات المنزلية الأساسية",
+                "متابعة جودة البناء وحل أي مشاكل طارئة",
+                "تدريب 200 عامل بناء محلي على مهارات البناء الحديث",
+              ],
+            },
+          ],
+          details: [
+            "إعادة بناء 500+ منزل مدمر",
+            "توفير المأوى المؤقت الآمن",
+            "إصلاح البنية التحتية للأحياء",
+            "معايير السكن الآمن والصحي",
+            "دعم نفسي واجتماعي للعائلات",
+            "توفير فرص عمل لـ 200 عامل بناء",
+          ],
+          stats: {
+            beneficiaries: "8,500+",
+            status: "مستمر",
+            coverage: "مدينة غزة، رفح",
+          },
+          progress: 78,
+          color: "orange",
+          impact: [
+            {
+              icon: "🏘️",
+              number: "500+",
+              label: "منزل مُعاد بناؤه",
+            },
+            {
+              icon: "👨‍👩‍👧‍👦",
+              number: "1,200+",
+              label: "عائلة مستفيدة",
+            },
+            {
+              icon: "🔨",
+              number: "200+",
+              label: "عامل بناء مدرب",
+            },
+          ],
+          challenges: [
+            "نقص مواد البناء بسبب القيود على الاستيراد",
+            "ارتفاع تكاليف البناء والنقل",
+            "صعوبة توفير الأراضي البديلة",
+          ],
+          achievements: [
+            "إعادة إيواء 390 عائلة في منازل آمنة",
+            "خلق 200 فرصة عمل مباشرة",
+            "تدريب 150 شاب على مهارات البناء",
+          ],
+        },
+        3: {
+          id: 3,
+          icon: "💧",
+          iconBg: "from-blue-100 to-cyan-100",
+          iconColor: "text-blue-600",
+          title: "المياه النظيفة والصرف الصحي",
+          description:
+            "مشروع متكامل لتأمين مصادر المياه النظيفة وتطوير أنظمة الصرف الصحي لضمان بيئة صحية آمنة.",
+          donor: "اليونيسف UNICEF",
+          budget: "$3,200,000",
+          duration: "30 شهر",
+          startDate: "فبراير 2024",
+          endDate: "يوليو 2026",
+          targetBeneficiaries: "25,000",
+          currentBeneficiaries: "23,000",
+          executionPlan: [
+            {
+              phase: "المرحلة الأولى - البنية التحتية",
+              duration: "10 أشهر",
+              activities: [
+                "حفر وتجهيز 15 بئر ارتوازي جديد",
+                "إنشاء 20 محطة تنقية مياه حديثة",
+                "مد شبكات أنابيب مياه بطول 50 كم",
+                "تركيب 100 خزان مياه بسعة 10,000 لتر",
+              ],
+            },
+            {
+              phase: "المرحلة الثانية - الصرف الصحي",
+              duration: "12 شهر",
+              activities: [
+                "إنشاء شبكات صرف صحي في 10 أحياء",
+                "بناء 5 محطات معالجة مياه الصرف",
+                "ترميم 200 حمام عام في المدارس والمساجد",
+                "توفير 1,000 خزان صرف منزلي",
+              ],
+            },
+            {
+              phase: "المرحلة الثالثة - التوعية والاستدامة",
+              duration: "8 أشهر",
+              activities: [
+                "تنفيذ 100 جلسة توعية عن النظافة الصحية",
+                "تدريب 50 فني صيانة على أنظمة المياه",
+                "إنشاء 30 لجنة مجتمعية لإدارة المياه",
+                "توزيع 5,000 مجموعة نظافة صحية",
+              ],
+            },
+          ],
+          details: [
+            "محطات تنقية المياه المتطورة",
+            "إصلاح وتركيب شبكات الأنابيب",
+            "برامج التوعية الصحية المكثفة",
+            "مرافق الصرف الصحي الحديثة",
+            "صيانة دورية لأنظمة المياه",
+            "مراقبة جودة المياه باستمرار",
+          ],
+          stats: {
+            beneficiaries: "25,000+",
+            status: "نشط",
+            coverage: "عدة مناطق",
+          },
+          progress: 92,
+          color: "blue",
+          impact: [
+            {
+              icon: "💧",
+              number: "20",
+              label: "محطة تنقية",
+            },
+            {
+              icon: "🚰",
+              number: "100+",
+              label: "نقطة مياه آمنة",
+            },
+            {
+              icon: "📊",
+              number: "92%",
+              label: "نسبة التغطية",
+            },
+          ],
+          challenges: [
+            "تلوث المياه الجوفية بمياه البحر",
+            "انقطاع الكهرباء المتكرر",
+            "التكاليف العالية للصيانة",
+          ],
+          achievements: [
+            "تأمين مياه نظيفة لـ 23,000 شخص",
+            "خفض الأمراض المنقولة بالمياه بنسبة 65%",
+            "توفير 50 فرصة عمل في قطاع المياه",
+          ],
+        },
+        4: {
+          id: 4,
+          icon: "📚",
+          iconBg: "from-green-100 to-emerald-100",
+          iconColor: "text-green-600",
+          title: "التعليم ودعم الشباب",
+          description:
+            "برنامج تعليمي شامل لإعادة تأهيل المدارس وتوفير بيئة تعليمية آمنة ودعم تطوير مهارات الشباب.",
+          donor: "اليونسكو UNESCO",
+          budget: "$1,800,000",
+          duration: "24 شهر",
+          startDate: "أبريل 2024",
+          endDate: "مارس 2026",
+          targetBeneficiaries: "12,000",
+          currentBeneficiaries: "10,560",
+          executionPlan: [
+            {
+              phase: "المرحلة الأولى - إعادة التأهيل",
+              duration: "8 أشهر",
+              activities: [
+                "ترميم وإصلاح 35 مدرسة متضررة",
+                "تجهيز 200 صف دراسي بالأثاث والتقنيات",
+                "إنشاء 10 مكتبات مدرسية متطورة",
+                "بناء 15 ملعب رياضي للأنشطة",
+              ],
+            },
+            {
+              phase: "المرحلة الثانية - التعليم والتدريب",
+              duration: "12 شهر",
+              activities: [
+                "توفير حقائب مدرسية لـ 12,000 طالب",
+                "تدريب 300 معلم على أساليب التعليم الحديثة",
+                "تنفيذ برامج الدعم النفسي لـ 5,000 طالب",
+                "إطلاق 50 دورة تدريبية مهنية للشباب",
+              ],
+            },
+            {
+              phase: "المرحلة الثالثة - البرامج الإضافية",
+              duration: "4 أشهر",
+              activities: [
+                "تنظيم مخيمات صيفية لـ 2,000 طفل",
+                "إطلاق 20 ناد للأنشطة اللامنهجية",
+                "توفير 500 منحة دراسية للطلاب المتفوقين",
+                "برامج ريادة الأعمال لـ 300 شاب",
+              ],
+            },
+          ],
+          details: [
+            "إعادة تأهيل 35 مدرسة",
+            "توفير الأدوات المدرسية المجانية",
+            "برامج ما بعد المدرسة المتنوعة",
+            "فرص المنح الدراسية للمتفوقين",
+            "تدريب المعلمين والكوادر",
+            "دعم نفسي واجتماعي للطلاب",
+          ],
+          stats: {
+            beneficiaries: "12,000+",
+            status: "نشط",
+            coverage: "35 مدرسة",
+          },
+          progress: 88,
+          color: "green",
+          impact: [
+            {
+              icon: "🏫",
+              number: "35",
+              label: "مدرسة مؤهلة",
+            },
+            {
+              icon: "👨‍🎓",
+              number: "12,000+",
+              label: "طالب مستفيد",
+            },
+            {
+              icon: "📖",
+              number: "25,000+",
+              label: "كتاب موزع",
+            },
+          ],
+          challenges: [
+            "اكتظاظ الصفوف الدراسية",
+            "نقص الكوادر التعليمية المؤهلة",
+            "ضعف البنية التحتية التكنولوجية",
+          ],
+          achievements: [
+            "عودة 10,560 طالب للمدارس",
+            "تدريب 280 معلم على التعليم الحديث",
+            "تخريج 200 شاب من برامج التدريب المهني",
+          ],
+        },
+        5: {
+          id: 5,
+          icon: "🍎",
+          iconBg: "from-yellow-100 to-orange-100",
+          iconColor: "text-yellow-600",
+          title: "برامج الأمن الغذائي",
+          description:
+            "مبادرة متكاملة لمكافحة الجوع وتوفير الغذاء الصحي ودعم مشاريع الزراعة المستدامة.",
+          donor: "برنامج الأغذية العالمي WFP",
+          budget: "$4,500,000",
+          duration: "36 شهر",
+          startDate: "يناير 2024",
+          endDate: "ديسمبر 2026",
+          targetBeneficiaries: "20,000",
+          currentBeneficiaries: "19,000",
+          executionPlan: [
+            {
+              phase: "المرحلة الأولى - الإغاثة الطارئة",
+              duration: "6 أشهر",
+              activities: [
+                "توزيع 60,000 سلة غذائية طارئة",
+                "توفير وجبات ساخنة يومية لـ 5,000 أسرة",
+                "إنشاء 10 مطابخ مجتمعية",
+                "توزيع قسائم غذائية بقيمة 2 مليون دولار",
+              ],
+            },
+            {
+              phase: "المرحلة الثانية - الزراعة المستدامة",
+              duration: "18 شهر",
+              activities: [
+                "إنشاء 50 حديقة مجتمعية منتجة",
+                "توزيع 10,000 مجموعة بذور وأدوات زراعية",
+                "تدريب 500 مزارع على الزراعة الحديثة",
+                "إنشاء 20 بيت محمي للخضروات",
+              ],
+            },
+            {
+              phase: "المرحلة الثالثة - التغذية والتوعية",
+              duration: "12 شهر",
+              activities: [
+                "تنفيذ 200 ورشة عن التغذية الصحية",
+                "برنامج إفطار مدرسي لـ 8,000 طالب",
+                "مكافحة سوء التغذية عند 3,000 طفل",
+                "إنشاء سوق مزارعين محلي",
+              ],
+            },
+          ],
+          details: [
+            "حزم غذائية شهرية للأسر",
+            "حدائق مجتمعية منتجة",
+            "ورش عمل التغذية الصحية",
+            "تدريب زراعي متخصص",
+            "دعم المزارعين المحليين",
+            "برامج مكافحة سوء التغذية",
+          ],
+          stats: {
+            beneficiaries: "20,000+",
+            status: "نشط",
+            coverage: "جميع المناطق",
+          },
+          progress: 95,
+          color: "yellow",
+          impact: [
+            {
+              icon: "📦",
+              number: "5,000+",
+              label: "حزمة شهرية",
+            },
+            {
+              icon: "🌱",
+              number: "50+",
+              label: "حديقة مجتمعية",
+            },
+            {
+              icon: "👥",
+              number: "20,000+",
+              label: "مستفيد مباشر",
+            },
+          ],
+          challenges: [
+            "ارتفاع أسعار المواد الغذائية",
+            "صعوبة استيراد البذور الزراعية",
+            "محدودية الأراضي الزراعية",
+          ],
+          achievements: [
+            "القضاء على الجوع لدى 19,000 شخص",
+            "إنتاج 50 طن خضروات من الحدائق المجتمعية",
+            "خلق 100 فرصة عمل في الزراعة",
+          ],
+        },
+        6: {
+          id: 6,
+          icon: "💼",
+          iconBg: "from-purple-100 to-indigo-100",
+          iconColor: "text-purple-600",
+          title: "سبل العيش والتوظيف",
+          description:
+            "برنامج شامل لتمكين الشباب اقتصادياً عبر التدريب المهني ودعم المشاريع الصغيرة وخلق فرص العمل.",
+          donor: "البنك الدولي World Bank",
+          budget: "$2,000,000",
+          duration: "30 شهر",
+          startDate: "مايو 2024",
+          endDate: "أكتوبر 2026",
+          targetBeneficiaries: "5,000",
+          currentBeneficiaries: "3,500",
+          executionPlan: [
+            {
+              phase: "المرحلة الأولى - التدريب المهني",
+              duration: "10 أشهر",
+              activities: [
+                "افتتاح 5 مراكز تدريب مهني مجهزة",
+                "تدريب 2,000 شاب على 15 مهنة مختلفة",
+                "توفير شهادات معتمدة دولياً",
+                "تدريب 500 شاب على مهارات تكنولوجيا المعلومات",
+              ],
+            },
+            {
+              phase: "المرحلة الثانية - دعم ريادة الأعمال",
+              duration: "12 شهر",
+              activities: [
+                "توفير 300 قرض صغير بدون فوائد",
+                "تدريب 500 رائد أعمال على إدارة المشاريع",
+                "إنشاء حاضنة أعمال لـ 50 مشروع ناشئ",
+                "معرض سنوي للمشاريع الصغيرة",
+              ],
+            },
+            {
+              phase: "المرحلة الثالثة - التوظيف والمتابعة",
+              duration: "8 أشهر",
+              activities: [
+                "توظيف 1,500 شاب في القطاع الخاص",
+                "متابعة ودعم 300 مشروع صغير",
+                "إنشاء شبكة تواصل بين رواد الأعمال",
+                "تقييم نجاح المشاريع ونسب الاستدامة",
+              ],
+            },
+          ],
+          details: [
+            "برامج التدريب المهني المتنوعة",
+            "دعم التمويل الصغير بدون فوائد",
+            "تطوير مهارات الأعمال",
+            "خدمات التوظيف والإرشاد",
+            "حاضنة أعمال للمشاريع الناشئة",
+            "شبكة دعم رواد الأعمال",
+          ],
+          stats: {
+            beneficiaries: "5,000+",
+            status: "التوسع",
+            coverage: "المراكز الحضرية",
+          },
+          progress: 70,
+          color: "purple",
+          impact: [
+            {
+              icon: "💼",
+              number: "1,500+",
+              label: "فرصة عمل",
+            },
+            {
+              icon: "🏪",
+              number: "300+",
+              label: "مشروع صغير",
+            },
+            {
+              icon: "📈",
+              number: "70%",
+              label: "معدل النجاح",
+            },
+          ],
+          challenges: [
+            "ارتفاع نسبة البطالة في القطاع",
+            "محدودية فرص الاستثمار",
+            "صعوبة الوصول للأسواق الخارجية",
+          ],
+          achievements: [
+            "تدريب 2,100 شاب على مهن مطلوبة",
+            "إطلاق 210 مشروع صغير ناجح",
+            "توظيف 1,050 شاب في القطاع الخاص",
+          ],
+        },
+      };
+
+      // Color Configuration
+      const colorConfig = {
+        red: {
+          border: "border-red-200",
+          bg: "bg-red-50",
+          text: "text-red-600",
+          progress: "bg-gradient-to-r from-red-500 to-pink-600",
+          badge: "bg-red-100 text-red-700",
+          hero: "bg-red-500/20",
+        },
+        orange: {
+          border: "border-orange-200",
+          bg: "bg-orange-50",
+          text: "text-orange-600",
+          progress: "bg-gradient-to-r from-orange-500 to-amber-600",
+          badge: "bg-orange-100 text-orange-700",
+          hero: "bg-orange-500/20",
+        },
+        blue: {
+          border: "border-blue-200",
+          bg: "bg-blue-50",
+          text: "text-blue-600",
+          progress: "bg-gradient-to-r from-blue-500 to-cyan-600",
+          badge: "bg-blue-100 text-blue-700",
+          hero: "bg-blue-500/20",
+        },
+        green: {
+          border: "border-green-200",
+          bg: "bg-green-50",
+          text: "text-green-600",
+          progress: "bg-gradient-to-r from-green-500 to-emerald-600",
+          badge: "bg-green-100 text-green-700",
+          hero: "bg-green-500/20",
+        },
+        yellow: {
+          border: "border-yellow-200",
+          bg: "bg-yellow-50",
+          text: "text-yellow-600",
+          progress: "bg-gradient-to-r from-yellow-500 to-orange-600",
+          badge: "bg-yellow-100 text-yellow-700",
+          hero: "bg-yellow-500/20",
+        },
+        purple: {
+          border: "border-purple-200",
+          bg: "bg-purple-50",
+          text: "text-purple-600",
+          progress: "bg-gradient-to-r from-purple-500 to-indigo-600",
+          badge: "bg-purple-100 text-purple-700",
+          hero: "bg-purple-500/20",
+        },
+      };
+
+      // Get program ID from URL
+      function getProgramId() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get("id") || "1";
+        console.log("Program ID from URL:", id);
+        return id;
+      }
+
+      // Load program data
+      function loadProgram() {
+        try {
+          const programId = getProgramId();
+          console.log("Loading program with ID:", programId);
+          console.log("Available programs:", Object.keys(programsData));
+          const program = programsData[programId];
+          console.log("Program data found:", program);
+
+          if (!program) {
+            console.error("Program not found, redirecting...");
+            window.location.href = "programs.html";
+            return;
+          }
+
+          console.log("Program loaded successfully:", program.title);
+          console.log("Donor:", program.donor);
+          console.log("Budget:", program.budget);
+
+          const colors = colorConfig[program.color];
+
+          // Update Hero Section
+          const heroIcon = document.getElementById("heroIcon");
+          heroIcon.innerHTML = program.icon;
+          heroIcon.classList.remove("skeleton");
+          heroIcon.classList.add("bg-white/20");
+
+          const heroTitle = document.getElementById("heroTitle");
+          heroTitle.textContent = program.title;
+          heroTitle.classList.remove("skeleton", "h-12", "w-3/4", "mb-6");
+
+          const heroStatus = document.getElementById("heroStatus");
+          heroStatus.innerHTML = `<span class="inline-block px-6 py-2 ${colors.badge} rounded-full text-sm font-bold">${program.stats.status}</span>`;
+          heroStatus.classList.remove("skeleton", "h-8", "w-32");
+
+          const heroDescription = document.getElementById("heroDescription");
+          heroDescription.textContent = program.description;
+          heroDescription.classList.remove("skeleton", "h-20");
+
+          // Quick Stats
+          const quickStats = document.getElementById("quickStats");
+          quickStats.innerHTML = `
+          <div class="bg-white/20 backdrop-blur-sm rounded-xl p-6 animate-fadeInUp" style="animation-delay: 0.6s">
+            <div class="text-3xl font-black mb-2">${program.stats.beneficiaries}</div>
+            <div class="text-sm font-semibold opacity-90">المستفيدون</div>
+          </div>
+          <div class="bg-white/20 backdrop-blur-sm rounded-xl p-6 animate-fadeInUp" style="animation-delay: 0.7s">
+            <div class="text-3xl font-black mb-2">${program.progress}%</div>
+            <div class="text-sm font-semibold opacity-90">نسبة الإنجاز</div>
+          </div>
+          <div class="bg-white/20 backdrop-blur-sm rounded-xl p-6 animate-fadeInUp" style="animation-delay: 0.8s">
+            <div class="text-3xl font-black mb-2">${program.stats.coverage}</div>
+            <div class="text-sm font-semibold opacity-90">التغطية</div>
+          </div>
+        `;
+
+          // Progress Bar with animation
+          const progressPercent = document.getElementById("progressPercent");
+          const progressBar = document.getElementById("progressBar");
+          const progressIcon = document.getElementById("progressIcon");
+
+          progressPercent.classList.add(colors.text);
+          // Add progress gradient classes one by one
+          const progressClasses = colors.progress.split(" ");
+          progressClasses.forEach((cls) => progressBar.classList.add(cls));
+          progressBar.classList.add("progress-pulse");
+          progressIcon.textContent = program.icon;
+
+          // Animate progress number from 0 to actual value
+          let currentProgress = 0;
+          const targetProgress = program.progress;
+          const duration = 2000; // 2 seconds
+          const incrementTime = 20; // Update every 20ms
+          const steps = duration / incrementTime;
+          const increment = targetProgress / steps;
+
+          const progressInterval = setInterval(() => {
+            currentProgress += increment;
+            if (currentProgress >= targetProgress) {
+              currentProgress = targetProgress;
+              clearInterval(progressInterval);
+              progressBar.classList.remove("progress-pulse");
+            }
+            progressPercent.textContent = `${Math.round(currentProgress)}%`;
+            progressBar.style.width = `${currentProgress}%`;
+          }, incrementTime);
+
+          // Project Info
+          document.getElementById("donorName").textContent = program.donor;
+          document.getElementById("budgetAmount").textContent = program.budget;
+          document.getElementById("durationInfo").textContent =
+            program.duration;
+          document.getElementById(
+            "dateRange"
+          ).textContent = `${program.startDate} - ${program.endDate}`;
+          document.getElementById(
+            "beneficiariesCount"
+          ).textContent = `${program.currentBeneficiaries} من أصل ${program.targetBeneficiaries}`;
+          const beneficiariesPercent = Math.round(
+            (parseInt(program.currentBeneficiaries.replace(",", "")) /
+              parseInt(program.targetBeneficiaries.replace(",", ""))) *
+              100
+          );
+          document.getElementById(
+            "beneficiariesProgress"
+          ).textContent = `تم الوصول إلى ${beneficiariesPercent}% من المستهدفين`;
+
+          // Execution Plan
+          const executionPlan = document.getElementById("executionPlan");
+          program.executionPlan.forEach((phase, index) => {
+            const phaseDiv = document.createElement("div");
+            phaseDiv.className = `bg-white rounded-2xl shadow-lg p-8 border-r-4 ${colors.border} scroll-fade-in`;
+            phaseDiv.style.animationDelay = `${index * 0.2}s`;
+
+            phaseDiv.innerHTML = `
+              <div class="flex items-start gap-4 mb-6">
+                <div class="phase-icon-${
+                  program.color
+                } w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 text-2xl font-black ${
+              colors.text
+            }">
+                  ${index + 1}
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-2xl font-bold text-gray-900 mb-2">${
+                    phase.phase
+                  }</h3>
+                  <p class="text-gray-600 font-semibold">⏱️ المدة: ${
+                    phase.duration
+                  }</p>
+                </div>
+              </div>
+              <div class="space-y-3">
+                ${phase.activities
+                  .map(
+                    (activity) => `
+                  <div class="flex items-start gap-3 bg-gray-50 p-4 rounded-lg">
+                    <svg class="w-6 h-6 ${colors.text} flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    <p class="text-gray-700">${activity}</p>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            `;
+
+            executionPlan.appendChild(phaseDiv);
+          });
+
+          // Challenges
+          const challengesList = document.getElementById("challengesList");
+          challengesList.innerHTML = program.challenges
+            .map(
+              (challenge) => `
+          <div class="bg-white rounded-xl shadow-md p-6 border-r-4 border-red-300">
+            <div class="flex items-start gap-3">
+              <span class="text-2xl">⚠️</span>
+              <p class="text-gray-700 font-medium">${challenge}</p>
+            </div>
+          </div>
+        `
+            )
+            .join("");
+
+          // Achievements
+          const achievementsList = document.getElementById("achievementsList");
+          achievementsList.innerHTML = program.achievements
+            .map(
+              (achievement) => `
+          <div class="bg-white rounded-xl shadow-md p-6 border-r-4 border-green-300">
+            <div class="flex items-start gap-3">
+              <span class="text-2xl">🏆</span>
+              <p class="text-gray-700 font-medium">${achievement}</p>
+            </div>
+          </div>
+        `
+            )
+            .join("");
+
+          // Features Grid
+          const featuresGrid = document.getElementById("featuresGrid");
+          program.details.forEach((detail, index) => {
+            const featureDiv = document.createElement("div");
+            featureDiv.className = `stagger-item bg-white rounded-xl shadow-lg p-6 border-r-4 ${colors.border}`;
+            featureDiv.style.animationDelay = `${index * 0.1}s`;
+
+            featureDiv.innerHTML = `
+              <div class="flex items-start gap-4">
+                <div class="feature-icon-${program.color} w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span class="text-2xl">✓</span>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-gray-900 mb-2">${detail}</h3>
+                  <p class="text-gray-600 text-sm">ميزة أساسية في البرنامج تساهم في تحقيق الأهداف المرجوة</p>
+                </div>
+              </div>
+            `;
+
+            featuresGrid.appendChild(featureDiv);
+          });
+
+          // Impact Statistics
+          const impactGrid = document.getElementById("impactGrid");
+          program.impact.forEach((item, index) => {
+            const impactDiv = document.createElement("div");
+            impactDiv.className = `impact-card impact-bg-${program.color} rounded-2xl shadow-xl p-8 text-center transform hover:scale-105 transition-all`;
+            impactDiv.style.animationDelay = `${index * 0.15}s`;
+
+            impactDiv.innerHTML = `
+              <div class="text-5xl mb-4">${item.icon}</div>
+              <div class="text-4xl font-black ${colors.text} mb-2">${item.number}</div>
+              <div class="text-gray-700 font-semibold">${item.label}</div>
+            `;
+
+            impactGrid.appendChild(impactDiv);
+          }); // Trigger animations
+          setTimeout(() => {
+            document.querySelectorAll(".stagger-item").forEach((el) => {
+              el.classList.add("visible");
+            });
+            document.querySelectorAll(".impact-card").forEach((el) => {
+              el.classList.add("visible");
+            });
+          }, 300);
+
+          console.log("✅ Program loaded and displayed successfully!");
+        } catch (error) {
+          console.error("❌ Error loading program:", error);
+          console.error("Error details:", error.message);
+          console.error("Error stack:", error.stack);
+          // Don't redirect - let user see the error in console
+          alert(
+            "حدث خطأ في تحميل البرنامج. افتح Console (F12) لمعرفة التفاصيل"
+          );
+        }
+      } // Intersection Observer for scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", () => {
+        loadProgram();
+
+        // Observe scroll animations
+        setTimeout(() => {
+          document.querySelectorAll(".scroll-fade-in").forEach((el) => {
+            observer.observe(el);
+          });
+        }, 100);
+      });
+    </script>
+
+    <script>
+      // Mobile menu toggle
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const menuIcon = document.getElementById("menu-icon");
+      const closeIcon = document.getElementById("close-icon");
+
+      mobileMenuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        menuIcon.classList.toggle("hidden");
+        closeIcon.classList.toggle("hidden");
+      });
+    </script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#14b8a6",
+              "primary-dark": "#0d9488",
+            },
+          },
+        },
+      };
+    </script>
+  </body>
+</html>

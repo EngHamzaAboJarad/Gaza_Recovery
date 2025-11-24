@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>قصص النجاح - مبادرة إعمار غزة</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/logo.png" />
+    <link rel="shortcut icon" href="assets/logo.png" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap");
+
+      * {
+        font-family: "Cairo", sans-serif;
+      }
+
+      .header-animate {
+        animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 1s ease-in forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .back-button {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .back-button:hover {
+        transform: translateX(5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      /* Scroll Animations */
+      .scroll-fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .scroll-fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .scroll-slide-right {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .scroll-slide-right.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .scroll-slide-left {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .scroll-slide-left.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .scroll-zoom-in {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .scroll-zoom-in.visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .stagger-item {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .stagger-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Hero Image Animation */
+      @keyframes heroZoom {
+        from {
+          transform: scale(1.1);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .hero-image {
+        animation: heroZoom 1.5s ease-out forwards;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-content > * {
+        animation: fadeInUp 1s ease-out backwards;
+      }
+
+      .hero-content > *:nth-child(1) {
+        animation-delay: 0.2s;
+      }
+      .hero-content > *:nth-child(2) {
+        animation-delay: 0.4s;
+      }
+      .hero-content > *:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+
+      /* Nav dropdown styles */
+      .nav-dropdown {
+        position: fixed;
+        top: 5rem;
+        left: 0;
+        right: 0;
+        width: 100%;
+        transform: translateY(-10px);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        z-index: 40;
+      }
+
+      .nav-item:hover .nav-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .nav-item:hover .nav-dropdown,
+      .nav-dropdown:hover {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      @media (max-width: 1023px) {
+        .nav-dropdown {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav
+      id="navbar"
+      class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-md transition-all duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <!-- Logo -->
+          <div class="flex-shrink-0">
+            <a
+              href="index.html"
+              class="inline-flex items-center gap-3 hover:opacity-80 transition-all duration-300 group"
+            >
+              <div class="relative overflow-hidden rounded-full">
+                <img
+                  src="assets/logo.png"
+                  alt="Gaza Recovery Logo"
+                  class="h-12 w-auto drop-shadow-lg transition-all duration-300 group-hover:scale-110 mix-blend-multiply"
+                />
+              </div>
+              <span
+                class="text-lg font-bold bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent"
+                >مبادرة إعمار غزة</span
+              >
+            </a>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden lg:flex lg:items-center lg:space-x-2">
+            <div class="nav-item relative">
+              <a
+                href="index.html"
+                class="nav-link text-gray-700 hover:text-teal-600 transition-colors px-4 py-2 text-sm font-medium rounded-lg hover:bg-teal-50"
+                >الرئيسية</a
+              >
+            </div>
+            <div class="nav-item relative">
+              <a
+                href="programs.html"
+                class="nav-link text-gray-700 hover:text-teal-600 transition-colors px-4 py-2 text-sm font-medium rounded-lg hover:bg-teal-50"
+                >البرامج</a
+              >
+            </div>
+            <div class="nav-item relative">
+              <a
+                href="index.html#impact"
+                class="nav-link text-gray-700 hover:text-teal-600 transition-colors px-4 py-2 text-sm font-medium rounded-lg hover:bg-teal-50"
+                >التأثير</a
+              >
+            </div>
+            <div class="nav-item relative">
+              <a
+                href="index.html#contact"
+                class="nav-link text-gray-700 hover:text-teal-600 transition-colors px-4 py-2 text-sm font-medium rounded-lg hover:bg-teal-50"
+                >اتصل بنا</a
+              >
+            </div>
+            <a
+              href="index.html#donate"
+              class="bg-gradient-to-r from-teal-500 to-emerald-600 text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all ml-4"
+              >تبرع الآن</a
+            >
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="lg:hidden">
+            <button
+              id="mobile-menu-button"
+              type="button"
+              class="text-gray-700 hover:text-teal-600 focus:outline-none p-2 rounded-lg transition-all"
+            >
+              <svg
+                class="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  id="menu-icon"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+                <path
+                  id="close-icon"
+                  class="hidden"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div
+        id="mobile-menu"
+        class="hidden lg:hidden bg-white border-t border-gray-200 shadow-lg"
+      >
+        <div class="px-4 pt-2 pb-3 space-y-1">
+          <a
+            href="index.html"
+            class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
+            >الرئيسية</a
+          >
+          <a
+            href="programs.html"
+            class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
+            >البرامج</a
+          >
+          <a
+            href="index.html#impact"
+            class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
+            >التأثير</a
+          >
+          <a
+            href="index.html#contact"
+            class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
+            >اتصل بنا</a
+          >
+          <a
+            href="index.html#donate"
+            class="block px-4 py-3 rounded-lg text-base font-bold bg-gradient-to-r from-teal-500 to-emerald-600 text-white text-center"
+            >تبرع الآن</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Story Header -->
+    <section
+      id="story-header"
+      class="relative overflow-hidden"
+      style="min-height: 400px"
+    >
+      <div class="absolute inset-0">
+        <img
+          id="story-hero-image"
+          src=""
+          alt="Story Image"
+          class="w-full h-full object-cover hero-image"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"
+        ></div>
+      </div>
+
+      <div class="relative container mx-auto px-4 py-24">
+        <div class="max-w-4xl mx-auto text-center text-white hero-content">
+          <div class="mb-6">
+            <span
+              id="story-badge"
+              class="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-bold"
+            ></span>
+          </div>
+          <h1 id="story-title" class="text-4xl md:text-5xl font-bold mb-4"></h1>
+          <div class="flex items-center justify-center gap-4 text-white/90">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span id="story-date"></span>
+            </div>
+            <span>•</span>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                <path
+                  fill-rule="evenodd"
+                  d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span id="story-read-time"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Story Content -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <!-- Story Summary -->
+          <div
+            class="scroll-fade-in mb-12 p-8 bg-gradient-to-br from-teal-50 to-emerald-50 rounded-2xl border-r-4 border-teal-500"
+          >
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">ملخص القصة</h2>
+            <p
+              id="story-summary"
+              class="text-lg text-gray-700 leading-relaxed"
+            ></p>
+          </div>
+
+          <!-- Story Details -->
+          <div
+            id="story-content"
+            class="scroll-slide-right prose prose-lg max-w-none"
+          >
+            <!-- Content will be loaded dynamically -->
+          </div>
+
+          <!-- Story Stats -->
+          <div
+            id="story-stats"
+            class="scroll-zoom-in grid grid-cols-1 md:grid-cols-3 gap-6 mt-12"
+          >
+            <!-- Stats will be loaded dynamically -->
+          </div>
+
+          <!-- Quote Section -->
+          <div
+            id="story-quote"
+            class="scroll-slide-left my-12 p-8 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border-r-4 border-amber-500"
+          >
+            <!-- Quote will be loaded dynamically -->
+          </div>
+
+          <!-- Impact Section -->
+          <div class="scroll-fade-in mt-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">
+              التأثير والنتائج
+            </h2>
+            <div id="story-impact" class="space-y-4">
+              <!-- Impact items will be loaded dynamically -->
+            </div>
+          </div>
+
+          <!-- Related Projects -->
+          <div class="scroll-zoom-in mt-16 pt-12 border-t border-gray-200">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+              المشاريع ذات العلاقة
+            </h2>
+            <div
+              id="related-projects"
+              class="grid grid-cols-1 md:grid-cols-2 gap-6"
+            >
+              <!-- Related projects will be loaded dynamically -->
+            </div>
+          </div>
+
+          <!-- Call to Action -->
+          <div class="scroll-fade-in mt-16 text-center">
+            <div
+              class="inline-block p-8 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-2xl shadow-2xl"
+            >
+              <h3 class="text-2xl font-bold text-white mb-4">
+                كن جزءاً من قصة النجاح القادمة
+              </h3>
+              <p class="text-white/90 mb-6 max-w-2xl">
+                تبرعك يمكن أن يصنع الفرق في حياة عائلة أخرى
+              </p>
+              <a
+                href="index.html#donate"
+                class="inline-block px-8 py-4 bg-white text-teal-600 font-bold rounded-full hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                تبرع الآن
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="bg-gradient-to-br from-gray-900 via-gray-800 to-teal-900 text-white py-12"
+    >
+      <div class="container mx-auto px-4 text-center">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <div class="relative overflow-hidden rounded-full">
+            <img
+              src="assets/logo.png"
+              alt="Gaza Recovery Logo"
+              class="h-12 w-auto drop-shadow-xl mix-blend-screen"
+            />
+          </div>
+          <span class="text-lg font-bold text-white drop-shadow-lg"
+            >Gaza Recovery</span
+          >
+        </div>
+        <p class="text-gray-400 text-sm">
+          &copy; 2024 Gaza Recovery Initiative. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Stories Data
+      const storiesData = {
+        "family-rebuilt-home": {
+          title: "عائلة من خمسة أفراد تعود إلى منزلها المُعاد بناؤه",
+          titleEn: "Family of Five Returns to Their Rebuilt Home",
+          date: "15 مارس 2024",
+          readTime: "5 دقائق قراءة",
+          badge: "قصة نجاح",
+          badgeColor: "teal",
+          category: "Success Story",
+          image:
+            "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=600&fit=crop",
+          summary:
+            "بعد أشهر من التشرد، احتفلت عائلة أحمد بالانتقال إلى منزلهم المُعاد بناؤه بالكامل. قصة أمل وصمود تُظهر كيف يمكن للتضامن أن يُعيد بناء الحياة.",
+          content: [
+            {
+              type: "paragraph",
+              text: "في صباح بارد من شهر مارس، وقفت فاطمة أحمد أمام منزلها الجديد، ودموع الفرح تنهمر على خديها. 'لم نعتقد أبداً أننا سنحصل على منزل مرة أخرى'، قالت بصوت مرتجف من الامتنان.",
+            },
+            {
+              type: "paragraph",
+              text: "منذ ثمانية أشهر فقط، كانت عائلة أحمد - فاطمة وزوجها محمد وأطفالهم الثلاثة - يعيشون في ملجأ مؤقت بعد أن دمر منزلهم بالكامل خلال النزاع. فقدوا كل شيء: منزلهم، متعلقاتهم، وتقريباً فقدوا الأمل.",
+            },
+            {
+              type: "paragraph",
+              text: "لكن بفضل برنامج إعادة بناء المنازل التابع لمبادرة إعمار غزة، تغيرت حياتهم تماماً. استغرق البناء أربعة أشهر، حيث عمل فريق من المهندسين والبنائين المحليين على إنشاء منزل حديث يضم ثلاث غرف نوم، مطبخ مجهز بالكامل، وحمامين.",
+            },
+            {
+              type: "paragraph",
+              text: "المنزل الجديد لا يوفر فقط مأوى آمناً للعائلة، بل تم بناؤه وفق معايير هندسية حديثة تضمن السلامة والاستدامة البيئية. يحتوي على نظام طاقة شمسية، عزل حراري ممتاز، ونظام تجميع مياه الأمطار.",
+            },
+            {
+              type: "paragraph",
+              text: "'أطفالي الآن لديهم غرفة خاصة بهم للدراسة والنوم'، تقول فاطمة بابتسامة عريضة. 'يمكنهم الآن الذهاب إلى المدرسة من منزل حقيقي، وليس من ملجأ. هذا يعني لنا العالم بأسره.'",
+            },
+            {
+              type: "paragraph",
+              text: "محمد، رب الأسرة، أضاف: 'الأمر لا يتعلق فقط بالمنزل. إنه يتعلق بالكرامة والأمل. عندما فقدنا منزلنا، شعرنا وكأننا فقدنا جزءاً من هويتنا. الآن استعدناها.'",
+            },
+          ],
+          stats: [
+            { icon: "🏠", value: "120م²", label: "مساحة المنزل" },
+            { icon: "⏱️", value: "4 أشهر", label: "فترة البناء" },
+            { icon: "👨‍👩‍👧‍👦", value: "5 أفراد", label: "حجم العائلة" },
+          ],
+          quote: {
+            text: "لم نعتقد أبداً أننا سنحصل على منزل مرة أخرى. هذا المنزل ليس مجرد مبنى، إنه أملنا المُعاد بناؤه.",
+            author: "فاطمة أحمد",
+            role: "أم لثلاثة أطفال",
+          },
+          impact: [
+            "توفير سكن آمن وكريم لعائلة مكونة من 5 أفراد",
+            "إعادة الأطفال إلى الدراسة في بيئة مستقرة",
+            "تحسين الصحة النفسية للعائلة من خلال الاستقرار",
+            "خلق فرص عمل لـ 15 عامل بناء محلي خلال فترة البناء",
+          ],
+          relatedProjects: ["home-reconstruction", "education"],
+        },
+        "health-clinics-success": {
+          title: "العيادات الصحية المتنقلة تصل إلى 46,000 مريض",
+          titleEn: "Mobile Health Clinics Reach 46,000 Patients",
+          date: "10 مارس 2024",
+          readTime: "4 دقائق قراءة",
+          badge: "تحديث البرنامج",
+          badgeColor: "blue",
+          category: "Program Update",
+          image:
+            "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=1200&h=600&fit=crop",
+          summary:
+            "أسطول العيادات الصحية المتنقلة المكون من 12 عيادة يقدم الآن الرعاية الطبية الأساسية لأكثر من 46,000 مريض عبر غزة، مع التركيز على المناطق النائية والمحرومة.",
+          content: [
+            {
+              type: "paragraph",
+              text: "في إنجاز طبي كبير، وصل برنامج العيادات الصحية المتنقلة إلى معلم هام بخدمة أكثر من 46,000 مريض منذ إطلاقه قبل تسعة أشهر. هذا الإنجاز يمثل قفزة نوعية في توفير الرعاية الصحية للمناطق الأكثر احتياجاً في غزة.",
+            },
+            {
+              type: "paragraph",
+              text: "يتكون البرنامج من 12 عيادة متنقلة مجهزة بالكامل، كل منها مزودة بمعدات طبية حديثة وفريق طبي متخصص يشمل أطباء، ممرضين، وصيادلة. تتنقل العيادات بين المناطق النائية والمخيمات، حيث يصعب الوصول إلى المرافق الصحية التقليدية.",
+            },
+            {
+              type: "paragraph",
+              text: "الدكتورة سمر عبد الله، المديرة الطبية للبرنامج، توضح: 'نحن لا نقدم فقط الفحوصات الروتينية. كل عيادة متنقلة هي مستشفى صغير متكامل يوفر خدمات متنوعة من الرعاية الأولية إلى العلاج الطبيعي وخدمات الصحة النفسية.'",
+            },
+            {
+              type: "paragraph",
+              text: "يقدم البرنامج خدمات متنوعة تشمل: الفحوصات الطبية العامة، رعاية الأم والطفل، إدارة الأمراض المزمنة، التطعيمات، والإحالة للحالات المعقدة. كما توفر كل عيادة الأدوية الأساسية مجاناً للمرضى.",
+            },
+            {
+              type: "paragraph",
+              text: "أم خالد، 42 عاماً، إحدى المستفيدات من البرنامج، تقول: 'كان علي السفر لساعات للوصول إلى أقرب عيادة. الآن، العيادة تأتي إلى حينا مرتين في الأسبوع. هذا غير حياتي وحياة أطفالي تماماً.'",
+            },
+            {
+              type: "paragraph",
+              text: "يخطط البرنامج للتوسع خلال العام المقبل لإضافة 4 عيادات إضافية وتوسيع نطاق الخدمات لتشمل خدمات طب الأسنان والعيون، مما سيمكن من خدمة 70,000 مريض إضافي سنوياً.",
+            },
+          ],
+          stats: [
+            { icon: "🏥", value: "12", label: "عيادة متنقلة" },
+            { icon: "👥", value: "46,000", label: "مريض تم خدمتهم" },
+            { icon: "📅", value: "850", label: "زيارة أسبوعياً" },
+          ],
+          quote: {
+            text: "العيادة المتنقلة لم توفر لنا الرعاية الطبية فقط، بل أعادت إلينا الأمل والشعور بأن هناك من يهتم بصحتنا.",
+            author: "أم خالد",
+            role: "مستفيدة من البرنامج",
+          },
+          impact: [
+            "تقديم الرعاية الصحية لأكثر من 46,000 مريض",
+            "تقليل وقت السفر للحصول على الرعاية الطبية بنسبة 70%",
+            "توفير الأدوية الأساسية مجاناً لآلاف العائلات",
+            "خلق فرص عمل لـ 60 متخصص في المجال الطبي",
+          ],
+          relatedProjects: ["mobile-health"],
+        },
+        "impact-report-q1": {
+          title: "تقرير التأثير للربع الأول 2024: تقدم قياسي",
+          titleEn: "Q1 2024 Impact Report: Record Progress",
+          date: "1 مارس 2024",
+          readTime: "6 دقائق قراءة",
+          badge: "تقرير التأثير",
+          badgeColor: "amber",
+          category: "Impact Report",
+          image:
+            "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=600&fit=crop",
+          summary:
+            "الربع الأول من عام 2024 شهد تقدماً غير مسبوق عبر جميع برامجنا. مع 390 منزلاً تم إعادة بناؤه و15,000 شخص حصلوا على الرعاية الصحية، نواصل إحداث فرق حقيقي.",
+          content: [
+            {
+              type: "paragraph",
+              text: "يسعدنا أن نشارككم النتائج الرائعة للربع الأول من عام 2024، والتي تمثل أفضل ربع سنوي في تاريخ مبادرة إعمار غزة. هذه الإنجازات هي نتيجة مباشرة لدعمكم المستمر وثقتكم في رسالتنا.",
+            },
+            {
+              type: "paragraph",
+              text: "في برنامج إعادة بناء المنازل، نجحنا في إكمال 390 منزلاً، وهو رقم قياسي يتجاوز هدفنا الأولي بنسبة 30%. هذا يعني أن 390 عائلة - أكثر من 2,000 شخص - عادوا إلى منازل آمنة ومستدامة. حالياً، هناك 85 منزلاً إضافياً قيد البناء.",
+            },
+            {
+              type: "paragraph",
+              text: "على صعيد الرعاية الصحية، قدمت عياداتنا المتنقلة خدمات طبية لأكثر من 15,000 مريض خلال الأشهر الثلاثة الأولى من العام. تم إجراء أكثر من 10,000 فحص طبي، وتوزيع أدوية مجانية على 8,500 مريض، وإحالة 250 حالة معقدة إلى مستشفيات متخصصة.",
+            },
+            {
+              type: "paragraph",
+              text: "في مجال التعليم، التحق 900 طالب جديد ببرنامج المنح الدراسية، مع معدل نجاح 92% في الامتحانات الفصلية. كما تم توزيع 3,000 حقيبة مدرسية مجهزة بالكامل على الطلاب المحتاجين.",
+            },
+            {
+              type: "paragraph",
+              text: "أما مبادرة المياه النظيفة، التي أُكملت في مارس، فقد نجحت في تركيب 50 نظام تنقية مياه يخدم حالياً 15,000 مستفيد يومياً. اختبارات جودة المياه أظهرت مطابقة 100% لمعايير منظمة الصحة العالمية.",
+            },
+            {
+              type: "paragraph",
+              text: "من الناحية المالية، حافظنا على الشفافية الكاملة حيث تم صرف 85% من الموارد مباشرة على البرامج الميدانية، وهي نسبة تفوق معايير القطاع الخيري العالمي. تلقينا تبرعات من أكثر من 7,000 متبرع جديد، مما يعكس الثقة المتزايدة في عملنا.",
+            },
+          ],
+          stats: [
+            { icon: "🏠", value: "390", label: "منزل مكتمل" },
+            { icon: "👥", value: "15,000", label: "مستفيد من الرعاية الصحية" },
+            { icon: "🎓", value: "900", label: "طالب جديد" },
+          ],
+          quote: {
+            text: "هذه النتائج ليست مجرد أرقام، بل هي قصص حياة تغيرت. كل منزل يعني عائلة استعادت كرامتها، وكل مريض يعني حياة تم إنقاذها.",
+            author: "د. أحمد سالم",
+            role: "المدير التنفيذي لمبادرة إعمار غزة",
+          },
+          impact: [
+            "إعادة بناء 390 منزلاً يؤوي أكثر من 2,000 شخص",
+            "تقديم الرعاية الصحية لـ 15,000 مريض",
+            "دعم 900 طالب بمنح دراسية وحقائب مدرسية",
+            "توفير مياه نظيفة لـ 15,000 مستفيد يومياً",
+            "خلق 450 فرصة عمل مؤقتة ودائمة",
+          ],
+          relatedProjects: [
+            "home-reconstruction",
+            "mobile-health",
+            "education",
+            "clean-water",
+          ],
+        },
+      };
+
+      // Get story ID from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const storyId = urlParams.get("story") || "family-rebuilt-home";
+      const story = storiesData[storyId];
+
+      // Load story data
+      function loadStoryData() {
+        if (!story) {
+          window.location.href = "index.html#blog";
+          return;
+        }
+
+        // Update header
+        document.getElementById("story-hero-image").src = story.image;
+        document.getElementById("story-badge").textContent = story.badge;
+        document.getElementById(
+          "story-badge"
+        ).className = `px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-bold`;
+        document.getElementById("story-title").textContent = story.title;
+        document.getElementById("story-date").textContent = story.date;
+        document.getElementById("story-read-time").textContent = story.readTime;
+
+        // Update summary
+        document.getElementById("story-summary").textContent = story.summary;
+
+        // Update content
+        const contentHTML = story.content
+          .map((item) => {
+            if (item.type === "paragraph") {
+              return `<p class="text-lg text-gray-700 leading-relaxed mb-6">${item.text}</p>`;
+            }
+            return "";
+          })
+          .join("");
+        document.getElementById("story-content").innerHTML = contentHTML;
+
+        // Update stats
+        const statsHTML = story.stats
+          .map(
+            (stat) => `
+          <div class="text-center p-6 bg-gradient-to-br from-teal-50 to-emerald-50 rounded-xl">
+            <div class="text-4xl mb-2">${stat.icon}</div>
+            <div class="text-3xl font-bold text-teal-600 mb-1">${stat.value}</div>
+            <div class="text-gray-600">${stat.label}</div>
+          </div>
+        `
+          )
+          .join("");
+        document.getElementById("story-stats").innerHTML = statsHTML;
+
+        // Update quote
+        document.getElementById("story-quote").innerHTML = `
+          <svg class="w-12 h-12 text-amber-500 mb-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+          </svg>
+          <p class="text-2xl text-gray-800 font-semibold mb-4 italic">"${
+            story.quote.text
+          }"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
+              ${story.quote.author.charAt(0)}
+            </div>
+            <div>
+              <div class="font-bold text-gray-900">${story.quote.author}</div>
+              <div class="text-sm text-gray-600">${story.quote.role}</div>
+            </div>
+          </div>
+        `;
+
+        // Update impact
+        const impactHTML = story.impact
+          .map(
+            (item) => `
+          <div class="stagger-item flex items-start gap-3 p-4 bg-white rounded-lg shadow-sm">
+            <svg class="w-6 h-6 text-teal-500 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            <p class="text-gray-700">${item}</p>
+          </div>
+        `
+          )
+          .join("");
+        document.getElementById("story-impact").innerHTML = impactHTML;
+
+        // Update related projects
+        const projectsMap = {
+          "home-reconstruction": {
+            title: "برنامج إعادة بناء المنازل",
+            color: "teal",
+            icon: "🏠",
+          },
+          "mobile-health": {
+            title: "العيادات الصحية المتنقلة",
+            color: "blue",
+            icon: "❤️",
+          },
+          education: {
+            title: "صندوق التعليم والمنح",
+            color: "amber",
+            icon: "📚",
+          },
+          "clean-water": {
+            title: "مبادرة المياه النظيفة",
+            color: "emerald",
+            icon: "💧",
+          },
+        };
+
+        const relatedHTML = story.relatedProjects
+          .map((projectId) => {
+            const project = projectsMap[projectId];
+            return `
+            <a href="project-details-dynamic.html?project=${projectId}" class="block p-6 bg-gradient-to-br from-${project.color}-50 to-${project.color}-100 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105">
+              <div class="text-4xl mb-3">${project.icon}</div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">${project.title}</h3>
+              <div class="flex items-center gap-2 text-${project.color}-600 font-semibold">
+                <span>تعرف على المزيد</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </div>
+            </a>
+          `;
+          })
+          .join("");
+        document.getElementById("related-projects").innerHTML = relatedHTML;
+
+        // Update page title
+        document.title = `${story.title} - مبادرة إعمار غزة`;
+
+        // Re-observe dynamically loaded elements
+        setTimeout(() => {
+          const impactSection = document.getElementById("story-impact");
+          if (impactSection && window.staggerObserver) {
+            window.staggerObserver.observe(impactSection);
+          }
+        }, 100);
+      }
+
+      // Load data when page loads
+      loadStoryData();
+
+      // Scroll Animation Observer
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add("visible");
+            }, index * 100);
+          }
+        });
+      }, observerOptions);
+
+      // Observe all animated elements
+      document.addEventListener("DOMContentLoaded", () => {
+        const animatedElements = document.querySelectorAll(
+          ".scroll-fade-in, .scroll-slide-right, .scroll-slide-left, .scroll-zoom-in"
+        );
+        animatedElements.forEach((el) => observer.observe(el));
+
+        // Stagger animation for impact items
+        window.staggerObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const items = entry.target.querySelectorAll(".stagger-item");
+              items.forEach((item, index) => {
+                setTimeout(() => {
+                  item.classList.add("visible");
+                }, index * 150);
+              });
+            }
+          });
+        }, observerOptions);
+
+        const impactSection = document.getElementById("story-impact");
+        if (impactSection) {
+          window.staggerObserver.observe(impactSection);
+        }
+      });
+
+      // Smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      // Mobile menu toggle
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const menuIcon = document.getElementById("menu-icon");
+      const closeIcon = document.getElementById("close-icon");
+
+      if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener("click", () => {
+          mobileMenu.classList.toggle("hidden");
+          menuIcon.classList.toggle("hidden");
+          closeIcon.classList.toggle("hidden");
+        });
+      }
+    </script>
+  </body>
+</html>

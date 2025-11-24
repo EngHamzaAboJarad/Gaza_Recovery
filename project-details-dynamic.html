@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تفاصيل المشروع - مبادرة إعمار غزة</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/logo.png" />
+    <link rel="shortcut icon" href="assets/logo.png" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap");
+
+      * {
+        font-family: "Cairo", sans-serif;
+      }
+
+      .header-animate {
+        animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .progress-fill {
+        animation: fillProgress 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        transform-origin: right;
+      }
+
+      @keyframes fillProgress {
+        from {
+          transform: scaleX(0);
+        }
+        to {
+          transform: scaleX(1);
+        }
+      }
+
+      .stat-card {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .stat-card.visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      .stat-card:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 20px 50px rgba(20, 184, 166, 0.3);
+      }
+
+      .budget-item {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .budget-item.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .budget-bar {
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .budget-item.visible .budget-bar {
+        transform: scaleX(1);
+      }
+
+      .donor-card {
+        opacity: 0;
+        transform: scale(0.8) rotate(-5deg);
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .donor-card.visible {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+
+      .donor-card:hover {
+        transform: scale(1.05) translateY(-5px);
+        box-shadow: 0 15px 40px rgba(20, 184, 166, 0.25);
+      }
+
+      .timeline-item {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .timeline-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .timeline-dot {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.7);
+        }
+        50% {
+          box-shadow: 0 0 0 15px rgba(20, 184, 166, 0);
+        }
+      }
+
+      .badge-animate {
+        animation: badgeBounce 1s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      @keyframes badgeBounce {
+        0% {
+          transform: scale(0) rotate(-180deg);
+        }
+        60% {
+          transform: scale(1.2) rotate(10deg);
+        }
+        100% {
+          transform: scale(1) rotate(0deg);
+        }
+      }
+
+      .gradient-animate {
+        background-size: 200% 200%;
+        animation: gradientShift 3s ease infinite;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Scroll Animations */
+      .scroll-fade-in {
+        opacity: 0;
+        transition: opacity 0.8s ease-out;
+      }
+
+      .scroll-fade-in.visible {
+        opacity: 1;
+      }
+
+      .scroll-slide-right {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .scroll-slide-right.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .scroll-slide-left {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .scroll-slide-left.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .scroll-zoom-in {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .scroll-zoom-in.visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .stagger-item {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .stagger-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Hero Animations */
+      .hero-image {
+        animation: heroZoom 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      @keyframes heroZoom {
+        from {
+          opacity: 0;
+          transform: scale(1.1);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .hero-content {
+        animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .hero-content > * {
+        animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+      }
+
+      .hero-content > *:nth-child(1) {
+        animation-delay: 0.2s;
+      }
+      .hero-content > *:nth-child(2) {
+        animation-delay: 0.4s;
+      }
+      .hero-content > *:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+
+      /* Nav dropdown styles */
+      .nav-dropdown {
+        position: fixed;
+        top: 5rem;
+        left: 0;
+        right: 0;
+        width: 100%;
+        transform: translateY(-10px);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        z-index: 40;
+      }
+
+      .nav-item:hover .nav-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .nav-item:hover .nav-dropdown,
+      .nav-dropdown:hover {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      @media (max-width: 1023px) {
+        .nav-dropdown {
+          display: none !important;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .icon-float {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .counter {
+        transition: all 0.3s ease;
+      }
+
+      .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(0);
+        animation: ripple-effect 0.6s ease-out;
+        pointer-events: none;
+      }
+
+      @keyframes ripple-effect {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+
+      .back-button {
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .back-button:hover {
+        transform: translateX(10px);
+        background: linear-gradient(135deg, #14b8a6, #0d9488);
+      }
+
+      .image-container {
+        overflow: hidden;
+        border-radius: 1rem;
+      }
+
+      .image-container img {
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .image-container:hover img {
+        transform: scale(1.1);
+      }
+
+      .progress-glow {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .progress-glow::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        animation: shimmer 3s infinite;
+      }
+
+      @keyframes shimmer {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      .achievement {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .achievement::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(
+          transparent,
+          rgba(20, 184, 166, 0.3),
+          transparent 30%
+        );
+        animation: rotate 4s linear infinite;
+      }
+
+      @keyframes rotate {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav
+      id="navbar"
+      class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-md transition-all duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <!-- Logo -->
+          <div class="flex-shrink-0">
+            <a
+              href="index.html"
+              class="inline-flex items-center gap-3 hover:opacity-80 transition-all duration-300 group"
+            >
+              <div class="relative overflow-hidden rounded-full">
+                <img
+                  src="assets/logo.png"
+                  alt="Gaza Recovery Logo"
+                  class="h-12 w-auto drop-shadow-lg transition-all duration-300 group-hover:scale-110 mix-blend-multiply"
+                />
+              </div>
+              <span
+                class="text-lg font-bold bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent"
+                >مبادرة إعمار غزة</span
+              >
+            </a>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden lg:flex lg:items-center lg:space-x-2">
+            <div class="nav-item relative">
+              <a
+                href="index.html"
+                class="nav-link text-gray-700 hover:text-teal-600 transition-colors px-4 py-2 text-sm font-medium rounded-lg hover:bg-teal-50"
+                >الرئيسية</a
+              >
+            </div>
+            <div class="nav-item relative">
+              <a
+                href="programs.html"
+                class="nav-link text-gray-700 hover:text-teal-600 transition-colors px-4 py-2 text-sm font-medium rounded-lg hover:bg-teal-50"
+                >البرامج</a
+              >
+            </div>
+            <div class="nav-item relative">
+              <a
+                href="index.html#impact"
+                class="nav-link text-gray-700 hover:text-teal-600 transition-colors px-4 py-2 text-sm font-medium rounded-lg hover:bg-teal-50"
+                >التأثير</a
+              >
+            </div>
+            <div class="nav-item relative">
+              <a
+                href="index.html#contact"
+                class="nav-link text-gray-700 hover:text-teal-600 transition-colors px-4 py-2 text-sm font-medium rounded-lg hover:bg-teal-50"
+                >اتصل بنا</a
+              >
+            </div>
+            <a
+              href="index.html#donate"
+              class="bg-gradient-to-r from-teal-500 to-emerald-600 text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all ml-4"
+              >تبرع الآن</a
+            >
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="lg:hidden">
+            <button
+              id="mobile-menu-button"
+              type="button"
+              class="text-gray-700 hover:text-teal-600 focus:outline-none p-2 rounded-lg transition-all"
+            >
+              <svg
+                class="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  id="menu-icon"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+                <path
+                  id="close-icon"
+                  class="hidden"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div
+        id="mobile-menu"
+        class="hidden lg:hidden bg-white border-t border-gray-200 shadow-lg"
+      >
+        <div class="px-4 pt-2 pb-3 space-y-1">
+          <a
+            href="index.html"
+            class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
+            >الرئيسية</a
+          >
+          <a
+            href="programs.html"
+            class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
+            >البرامج</a
+          >
+          <a
+            href="index.html#impact"
+            class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
+            >التأثير</a
+          >
+          <a
+            href="index.html#contact"
+            class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
+            >اتصل بنا</a
+          >
+          <a
+            href="index.html#donate"
+            class="block px-4 py-3 rounded-lg text-base font-bold bg-gradient-to-r from-teal-500 to-emerald-600 text-white text-center"
+            >تبرع الآن</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Project Header -->
+    <section
+      id="project-header"
+      class="gradient-animate text-white py-20 relative overflow-hidden"
+    >
+      <div class="absolute inset-0 opacity-10">
+        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="grid"
+              width="40"
+              height="40"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 40 0 L 0 0 0 40"
+                fill="none"
+                stroke="white"
+                stroke-width="1"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </div>
+
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-4xl mx-auto text-center hero-content">
+          <span
+            id="badge-status"
+            class="badge-animate inline-block bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-full text-sm font-semibold mb-6 border-2 border-white/30"
+          >
+            قيد التنفيذ
+          </span>
+
+          <h1 id="project-title" class="text-5xl font-bold mb-6 header-animate">
+            اسم المشروع
+          </h1>
+
+          <p
+            id="project-subtitle"
+            class="text-xl mb-8 leading-relaxed opacity-90 header-animate"
+            style="animation-delay: 0.2s"
+          >
+            وصف المشروع
+          </p>
+
+          <div
+            class="flex justify-center gap-4 flex-wrap header-animate"
+            style="animation-delay: 0.4s"
+          >
+            <button
+              class="bg-white text-teal-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-teal-50 transition-all hover:scale-105 shadow-2xl relative overflow-hidden share-btn"
+            >
+              تبرع الآن
+            </button>
+            <button
+              class="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/30 transition-all border-2 border-white/30 hover:scale-105"
+            >
+              مشاركة المشروع
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="scroll-fade-in py-12 -mt-16 relative z-20">
+      <div class="container mx-auto px-4">
+        <div
+          id="quick-stats"
+          class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto"
+        >
+          <!-- Stats will be injected by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <!-- Right Column - Details -->
+          <div class="lg:col-span-2 space-y-8">
+            <!-- Project Image -->
+            <div
+              class="scroll-zoom-in image-container bg-white rounded-2xl shadow-lg overflow-hidden"
+            >
+              <img
+                id="project-image"
+                src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&h=400&fit=crop"
+                alt="Project"
+                class="w-full h-96 object-cover"
+              />
+            </div>
+
+            <!-- Project Description -->
+            <div class="scroll-fade-in bg-white rounded-2xl shadow-lg p-8">
+              <h2
+                class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3"
+              >
+                <span id="desc-icon" class="text-4xl">📋</span>
+                نظرة عامة على المشروع
+              </h2>
+              <div
+                id="project-description"
+                class="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-4"
+              >
+                <!-- Description will be injected -->
+              </div>
+            </div>
+
+            <!-- Budget Breakdown -->
+            <div class="scroll-slide-right bg-white rounded-2xl shadow-lg p-8">
+              <h2
+                class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3"
+              >
+                <span class="text-4xl">💰</span>
+                تفصيل الميزانية
+              </h2>
+              <div id="budget-breakdown" class="space-y-6">
+                <!-- Budget items will be injected -->
+              </div>
+
+              <div class="mt-8 pt-6 border-t-2 border-gray-200">
+                <div class="flex justify-between items-center">
+                  <span class="text-xl font-bold text-gray-800"
+                    >المجموع الكلي</span
+                  >
+                  <span
+                    id="total-budget"
+                    class="text-3xl font-bold text-teal-600"
+                    >$0</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="scroll-slide-left bg-white rounded-2xl shadow-lg p-8">
+              <h2
+                class="text-3xl font-bold text-gray-800 mb-8 flex items-center gap-3"
+              >
+                <span class="text-4xl">📅</span>
+                الجدول الزمني للمشروع
+              </h2>
+              <div id="timeline-container" class="space-y-6">
+                <!-- Timeline will be injected -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Left Column - Sidebar -->
+          <div class="lg:col-span-1 space-y-6">
+            <!-- Progress Card -->
+            <div
+              class="scroll-zoom-in bg-white rounded-2xl shadow-lg p-6 sticky top-24"
+            >
+              <div
+                id="achievement-card"
+                class="achievement relative text-white p-6 rounded-xl mb-6"
+              >
+                <div class="relative z-10">
+                  <div class="text-sm mb-2 opacity-90">التقدم الحالي</div>
+                  <div class="text-4xl font-bold mb-1">
+                    <span class="counter" id="progress-percent" data-target="0"
+                      >0</span
+                    >%
+                  </div>
+                  <div class="text-sm opacity-90">من الهدف</div>
+                </div>
+              </div>
+
+              <div class="space-y-4 mb-6">
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-600">المبلغ المجموع</span>
+                  <span
+                    id="raised-amount"
+                    class="text-2xl font-bold text-teal-600"
+                    >$0</span
+                  >
+                </div>
+
+                <div
+                  class="h-4 bg-gray-200 rounded-full overflow-hidden progress-glow"
+                >
+                  <div
+                    id="progress-bar"
+                    class="progress-fill h-full rounded-full"
+                  ></div>
+                </div>
+
+                <div class="flex justify-between text-sm text-gray-600">
+                  <span id="goal-text">الهدف: $0</span>
+                  <span id="remaining-text">المتبقي: $0</span>
+                </div>
+              </div>
+
+              <button
+                class="w-full bg-gradient-to-r from-teal-500 to-teal-600 text-white py-4 rounded-xl font-bold text-lg hover:from-teal-600 hover:to-emerald-600 transition-all hover:scale-105 shadow-lg hover:shadow-xl mb-4 relative overflow-hidden share-btn"
+              >
+                تبرع الآن
+              </button>
+
+              <div class="grid grid-cols-2 gap-3">
+                <button
+                  class="flex items-center justify-center gap-2 bg-blue-50 text-blue-600 py-3 rounded-lg font-semibold hover:bg-blue-100 transition-all"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                    />
+                  </svg>
+                  مشاركة
+                </button>
+                <button
+                  class="flex items-center justify-center gap-2 bg-teal-50 text-teal-600 py-3 rounded-lg font-semibold hover:bg-teal-100 transition-all"
+                >
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                    />
+                  </svg>
+                  حفظ
+                </button>
+              </div>
+            </div>
+
+            <!-- Top Donors -->
+            <div class="scroll-fade-in bg-white rounded-2xl shadow-lg p-6">
+              <h3
+                class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"
+              >
+                <span class="text-2xl">🏆</span>
+                أكبر المتبرعين
+              </h3>
+              <div id="donors-list" class="space-y-3">
+                <!-- Donors will be injected -->
+              </div>
+
+              <button
+                id="view-all-donors"
+                class="w-full mt-4 text-teal-600 font-semibold py-2 hover:bg-teal-50 rounded-lg transition-all"
+              >
+                عرض جميع المتبرعين
+              </button>
+            </div>
+
+            <!-- Share Section -->
+            <div
+              class="scroll-zoom-in bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl shadow-lg p-6 text-white text-center"
+            >
+              <div class="text-4xl mb-3">📢</div>
+              <h3 class="text-xl font-bold mb-2">ساعدنا في النشر</h3>
+              <p class="text-sm opacity-90 mb-4">
+                شارك المشروع مع أصدقائك وعائلتك
+              </p>
+              <div class="flex gap-2 justify-center">
+                <button
+                  class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all hover:scale-110"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                    />
+                  </svg>
+                </button>
+                <button
+                  class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all hover:scale-110"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+                    />
+                  </svg>
+                </button>
+                <button
+                  class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all hover:scale-110"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                    />
+                  </svg>
+                </button>
+                <button
+                  class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all hover:scale-110"
+                >
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="container mx-auto px-4 text-center">
+        <p class="text-gray-400">
+          © 2024 مبادرة إعمار غزة - جميع الحقوق محفوظة
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Project Data
+      const projectsData = {
+        "home-reconstruction": {
+          title: "برنامج إعادة بناء المنازل",
+          subtitle:
+            "إعادة بناء 500 منزل تم تدميرها خلال النزاع لتوفير سكن آمن وكريم للأسر المتضررة",
+          status: "قيد التنفيذ",
+          statusColor: "teal",
+          icon: "🏠",
+          image:
+            "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=400&fit=crop",
+          progress: 78,
+          raised: "$2.4M",
+          goal: "$3.1M",
+          donors: 1847,
+          gradient: "linear-gradient(135deg, #14b8a6, #0d9488, #0f766e)",
+          stats: [
+            { icon: "✅", value: 390, label: "منزل مكتمل", color: "teal" },
+            { icon: "🏗️", value: 85, label: "قيد البناء", color: "amber" },
+            { icon: "📋", value: 25, label: "متبقي", color: "gray" },
+            { icon: "👥", value: 1847, label: "متبرع", color: "purple" },
+          ],
+          description: [
+            "يهدف برنامج إعادة بناء المنازل إلى توفير مساكن آمنة ومستدامة للأسر التي فقدت منازلها، حيث نعمل على إعادة بناء 500 منزل بمعايير هندسية حديثة ومواد بناء عالية الجودة.",
+            "يشمل المشروع البنية التحتية الكاملة للمنازل من أنظمة الكهرباء والمياه والصرف الصحي، مع التركيز على الاستدامة البيئية واستخدام مواد صديقة للبيئة.",
+            "نعمل بالشراكة مع مهندسين محليين وشركات بناء موثوقة لضمان أعلى معايير الجودة والسلامة في جميع مراحل البناء.",
+          ],
+          budget: [
+            {
+              name: "مواد البناء",
+              amount: "$1.2M",
+              percent: 50,
+              color: "teal",
+            },
+            {
+              name: "العمالة والبناء",
+              amount: "$720K",
+              percent: 30,
+              color: "blue",
+            },
+            {
+              name: "التصميم والهندسة",
+              amount: "$240K",
+              percent: 10,
+              color: "purple",
+            },
+            {
+              name: "البنية التحتية",
+              amount: "$192K",
+              percent: 8,
+              color: "orange",
+            },
+            {
+              name: "إدارة المشروع",
+              amount: "$48K",
+              percent: 2,
+              color: "gray",
+            },
+          ],
+          timeline: [
+            {
+              title: "المرحلة 1: التصميم والتخطيط",
+              date: "يناير - مارس 2024",
+              desc: "تصميم المنازل واختيار المواقع",
+              color: "teal",
+            },
+            {
+              title: "المرحلة 2: البناء - المرحلة الأولى",
+              date: "أبريل - سبتمبر 2024",
+              desc: "بناء 200 منزل (مكتمل)",
+              color: "orange",
+            },
+            {
+              title: "المرحلة 3: البناء - المرحلة الثانية",
+              date: "أكتوبر 2024 - مارس 2025",
+              desc: "بناء 275 منزل (قيد التنفيذ)",
+              color: "amber",
+            },
+            {
+              title: "المرحلة 4: البناء - المرحلة النهائية",
+              date: "أبريل - يونيو 2025",
+              desc: "استكمال 25 منزل متبقي",
+              color: "gray",
+              isLast: true,
+            },
+          ],
+          donors: [
+            { name: "مؤسسة الخير", amount: "$500,000", rank: 1 },
+            { name: "محمد الأحمد", amount: "$250,000", rank: 2 },
+            { name: "سارة عبدالله", amount: "$150,000", rank: 3 },
+            { name: "جمعية البناء", amount: "$100,000", rank: 4 },
+            { name: "خالد عمر", amount: "$75,000", rank: 5 },
+          ],
+        },
+        "mobile-health": {
+          title: "عيادات صحية متنقلة",
+          subtitle:
+            "توفير الوصول إلى الرعاية الصحية لـ 50,000 شخص من خلال 12 عيادة متنقلة",
+          status: "قيد التنفيذ",
+          statusColor: "blue",
+          icon: "❤️",
+          image:
+            "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=400&fit=crop",
+          progress: 92,
+          raised: "$1.8M",
+          goal: "$1.96M",
+          donors: 2341,
+          gradient: "linear-gradient(135deg, #3b82f6, #2563eb, #1d4ed8)",
+          stats: [
+            { icon: "👥", value: 46000, label: "تم خدمتهم", color: "blue" },
+            { icon: "🏥", value: 12, label: "عيادة", color: "indigo" },
+            { icon: "📊", value: 850, label: "زيارة/أسبوع", color: "purple" },
+            { icon: "👨‍⚕️", value: 2341, label: "متبرع", color: "teal" },
+          ],
+          description: [
+            "برنامج العيادات الصحية المتنقلة يوفر خدمات رعاية صحية شاملة للمناطق النائية والمحرومة، حيث نصل إلى 50,000 مستفيد من خلال 12 عيادة متنقلة مجهزة بالكامل.",
+            "توفر العيادات خدمات الرعاية الأولية، الفحوصات الطبية، الأدوية الأساسية، والإحالة للحالات المعقدة، مع التركيز على صحة الأم والطفل والأمراض المزمنة.",
+            "يعمل في المشروع فريق طبي متخصص يشمل أطباء، ممرضين، وصيادلة، مع تقديم 850 زيارة أسبوعية لتغطية جميع المناطق المستهدفة.",
+          ],
+          budget: [
+            {
+              name: "المعدات الطبية",
+              amount: "$700K",
+              percent: 38,
+              color: "blue",
+            },
+            {
+              name: "الأدوية والمستلزمات",
+              amount: "$550K",
+              percent: 30,
+              color: "indigo",
+            },
+            {
+              name: "رواتب الكادر الطبي",
+              amount: "$400K",
+              percent: 22,
+              color: "purple",
+            },
+            {
+              name: "الوقود والصيانة",
+              amount: "$150K",
+              percent: 8,
+              color: "cyan",
+            },
+            {
+              name: "الإدارة والتنسيق",
+              amount: "$36K",
+              percent: 2,
+              color: "gray",
+            },
+          ],
+          timeline: [
+            {
+              title: "المرحلة 1: الإعداد والتجهيز",
+              date: "فبراير - أبريل 2024",
+              desc: "شراء العيادات المتنقلة وتجهيزها",
+              color: "blue",
+            },
+            {
+              title: "المرحلة 2: إطلاق الخدمة",
+              date: "مايو - يوليو 2024",
+              desc: "بدء العمل في 6 عيادات",
+              color: "indigo",
+            },
+            {
+              title: "المرحلة 3: التوسع",
+              date: "أغسطس - نوفمبر 2024",
+              desc: "إضافة 6 عيادات إضافية (قيد التنفيذ)",
+              color: "purple",
+            },
+            {
+              title: "المرحلة 4: التطوير المستمر",
+              date: "ديسمبر 2024 - مارس 2025",
+              desc: "تحسين الخدمات وزيادة التغطية",
+              color: "cyan",
+              isLast: true,
+            },
+          ],
+          donors: [
+            { name: "منظمة الصحة العالمية", amount: "$400,000", rank: 1 },
+            { name: "مؤسسة الهلال الأحمر", amount: "$300,000", rank: 2 },
+            { name: "أحمد السيد", amount: "$200,000", rank: 3 },
+            { name: "جمعية الرعاية الصحية", amount: "$150,000", rank: 4 },
+            { name: "فاطمة محمود", amount: "$100,000", rank: 5 },
+          ],
+        },
+        education: {
+          title: "صندوق التعليم والمنح الدراسية",
+          subtitle:
+            "دعم 2,000 طالب بالتعليم المناسب وتوفير فرص المنح الدراسية لبناء جيل متعلم",
+          status: "المرحلة الأولى",
+          statusColor: "amber",
+          icon: "📚",
+          image:
+            "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=400&fit=crop",
+          progress: 45,
+          raised: "$850K",
+          goal: "$1.9M",
+          donors: 1205,
+          gradient: "linear-gradient(135deg, #f59e0b, #f97316, #fb923c)",
+          stats: [
+            { icon: "👥", value: 900, label: "طالب مسجل", color: "orange" },
+            { icon: "🏫", value: 25, label: "مدرسة مشاركة", color: "amber" },
+            { icon: "👨‍🏫", value: 150, label: "معلم", color: "yellow" },
+            { icon: "🎓", value: 1205, label: "متبرع", color: "orange" },
+          ],
+          description: [
+            "يهدف صندوق التعليم والمنح الدراسية إلى توفير فرص تعليمية متميزة لأبناء غزة، حيث نسعى لدعم 2,000 طالب من خلال برامج تعليمية شاملة تضمن استمرارهم في التعليم وتطوير مهاراتهم.",
+            "يشمل المشروع توفير المستلزمات المدرسية، دفع الرسوم الدراسية، برامج التدريس التعويضي، ودعم الطلاب المتميزين بمنح دراسية كاملة للمراحل المتقدمة.",
+            "نعمل بالشراكة مع 25 مدرسة و150 معلماً متخصصاً لضمان جودة التعليم المقدم وتحقيق أفضل النتائج التعليمية للطلاب.",
+          ],
+          budget: [
+            {
+              name: "رسوم دراسية",
+              amount: "$350K",
+              percent: 41,
+              color: "orange",
+            },
+            {
+              name: "مستلزمات مدرسية",
+              amount: "$200K",
+              percent: 24,
+              color: "amber",
+            },
+            {
+              name: "رواتب المعلمين",
+              amount: "$180K",
+              percent: 21,
+              color: "yellow",
+            },
+            { name: "منح دراسية", amount: "$100K", percent: 12, color: "lime" },
+            {
+              name: "تجهيزات وإدارة",
+              amount: "$20K",
+              percent: 2,
+              color: "gray",
+            },
+          ],
+          timeline: [
+            {
+              title: "المرحلة 1: التخطيط والتجهيز",
+              date: "يناير - فبراير 2024",
+              desc: "تحديد المدارس المستهدفة والطلاب المستفيدين",
+              color: "orange",
+            },
+            {
+              title: "المرحلة 2: بدء التنفيذ",
+              date: "مارس - يونيو 2024",
+              desc: "توزيع المستلزمات ودفع الرسوم الدراسية",
+              color: "amber",
+            },
+            {
+              title: "المرحلة 3: المتابعة والدعم",
+              date: "يوليو - أكتوبر 2024",
+              desc: "برامج الدعم والتدريس التعويضي (قيد التنفيذ)",
+              color: "yellow",
+            },
+            {
+              title: "المرحلة 4: التقييم والتوسع",
+              date: "نوفمبر - ديسمبر 2024",
+              desc: "تقييم النتائج والتخطيط للتوسع",
+              color: "lime",
+              isLast: true,
+            },
+          ],
+          donors: [
+            { name: "أحمد محمد", amount: "$50,000", rank: 1 },
+            { name: "فاطمة علي", amount: "$35,000", rank: 2 },
+            { name: "يوسف حسن", amount: "$25,000", rank: 3 },
+            { name: "مريم خالد", amount: "$20,000", rank: 4 },
+            { name: "عمر سالم", amount: "$15,000", rank: 5 },
+          ],
+        },
+        "clean-water": {
+          title: "مبادرة المياه النظيفة",
+          subtitle:
+            "تركيب 50 نظام تنقية مياه لتوفير مياه شرب آمنة لـ 15,000 مستفيد",
+          status: "مكتمل",
+          statusColor: "emerald",
+          icon: "✅",
+          image:
+            "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=800&h=400&fit=crop",
+          progress: 100,
+          raised: "$1.2M",
+          goal: "$1.2M",
+          donors: 1678,
+          gradient: "linear-gradient(135deg, #10b981, #059669, #047857)",
+          stats: [
+            { icon: "💧", value: 50, label: "نظام تنقية", color: "emerald" },
+            { icon: "👥", value: 15000, label: "مستفيد", color: "green" },
+            {
+              icon: "📅",
+              value: "مارس 2024",
+              label: "تاريخ الإنجاز",
+              color: "teal",
+              isText: true,
+            },
+            { icon: "🎉", value: 1678, label: "متبرع", color: "cyan" },
+          ],
+          description: [
+            "مبادرة المياه النظيفة هي مشروع مكتمل بنجاح يهدف إلى توفير مياه شرب آمنة ونظيفة من خلال تركيب 50 نظام تنقية مياه متطور في المناطق الأكثر احتياجاً.",
+            "المشروع يخدم 15,000 مستفيد يومياً، حيث توفر أنظمة التنقية مياه شرب آمنة ومطابقة لمعايير منظمة الصحة العالمية، مما ساهم في تحسين الصحة العامة وتقليل الأمراض المنقولة بالمياه.",
+            "تم إكمال المشروع في مارس 2024 بنجاح تام، مع تدريب فرق صيانة محلية لضمان استمرارية عمل الأنظمة وصيانتها الدورية.",
+          ],
+          budget: [
+            {
+              name: "أنظمة التنقية",
+              amount: "$600K",
+              percent: 50,
+              color: "emerald",
+            },
+            {
+              name: "التركيب والتشغيل",
+              amount: "$300K",
+              percent: 25,
+              color: "green",
+            },
+            {
+              name: "البنية التحتية",
+              amount: "$180K",
+              percent: 15,
+              color: "teal",
+            },
+            {
+              name: "التدريب والصيانة",
+              amount: "$96K",
+              percent: 8,
+              color: "cyan",
+            },
+            {
+              name: "الإدارة والمتابعة",
+              amount: "$24K",
+              percent: 2,
+              color: "gray",
+            },
+          ],
+          timeline: [
+            {
+              title: "المرحلة 1: التخطيط والمسح",
+              date: "أكتوبر - نوفمبر 2023",
+              desc: "تحديد المواقع واحتياجات المياه",
+              color: "emerald",
+            },
+            {
+              title: "المرحلة 2: التوريد والتجهيز",
+              date: "ديسمبر 2023 - يناير 2024",
+              desc: "شراء وتجهيز أنظمة التنقية",
+              color: "green",
+            },
+            {
+              title: "المرحلة 3: التركيب والتشغيل",
+              date: "فبراير - مارس 2024",
+              desc: "تركيب جميع الأنظمة وتشغيلها",
+              color: "teal",
+            },
+            {
+              title: "المرحلة 4: الإنجاز والتسليم",
+              date: "مارس 2024",
+              desc: "إنجاز كامل المشروع وتسليمه للمجتمع",
+              color: "cyan",
+              isLast: true,
+            },
+          ],
+          donors: [
+            { name: "مؤسسة المياه الدولية", amount: "$300,000", rank: 1 },
+            { name: "صندوق التنمية", amount: "$250,000", rank: 2 },
+            { name: "علي أحمد", amount: "$150,000", rank: 3 },
+            { name: "جمعية البيئة", amount: "$100,000", rank: 4 },
+            { name: "نور الدين", amount: "$80,000", rank: 5 },
+          ],
+        },
+      };
+
+      // Get project ID from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const projectId = urlParams.get("project") || "home-reconstruction";
+      const project = projectsData[projectId];
+
+      // Populate page with project data
+      function loadProjectData() {
+        if (!project) {
+          window.location.href = "index.html";
+          return;
+        }
+
+        // Update header
+        document.getElementById("project-title").textContent = project.title;
+        document.getElementById("project-subtitle").textContent =
+          project.subtitle;
+        document.getElementById("badge-status").textContent = project.status;
+        document.querySelector("#project-header").style.background =
+          project.gradient;
+
+        // Update project image
+        if (project.image) {
+          document.getElementById("project-image").src = project.image;
+        }
+
+        // Update stats
+        const statsHTML = project.stats
+          .map(
+            (stat, index) => `
+                <div class="stat-card bg-white rounded-2xl shadow-xl p-6 text-center border-t-4 border-${
+                  stat.color
+                }-500" style="transition-delay: ${index * 0.1}s">
+                    <div class="text-4xl mb-2">${stat.icon}</div>
+                    <div class="text-3xl font-bold text-${stat.color}-600 ${
+              stat.isText ? "" : "counter"
+            }" ${stat.isText ? "" : `data-target="${stat.value}"`}>${
+              stat.isText ? stat.value : "0"
+            }</div>
+                    <div class="text-sm text-gray-600 mt-2">${stat.label}</div>
+                </div>
+            `
+          )
+          .join("");
+        document.getElementById("quick-stats").innerHTML = statsHTML;
+
+        // Update description
+        document.getElementById("desc-icon").textContent = project.icon;
+        const descHTML = project.description.map((p) => `<p>${p}</p>`).join("");
+        document.getElementById("project-description").innerHTML = descHTML;
+
+        // Update budget
+        const budgetHTML = project.budget
+          .map(
+            (item, index) => `
+                <div class="budget-item" style="transition-delay: ${
+                  index * 0.1
+                }s">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-semibold text-gray-700">${
+                          item.name
+                        }</span>
+                        <span class="text-${item.color}-600 font-bold">${
+              item.amount
+            } (${item.percent}%)</span>
+                    </div>
+                    <div class="h-4 bg-gray-200 rounded-full overflow-hidden progress-glow">
+                        <div class="budget-bar h-full bg-gradient-to-r from-${
+                          item.color
+                        }-500 to-${
+              item.color
+            }-600 rounded-full" style="width: ${item.percent}%;"></div>
+                    </div>
+                </div>
+            `
+          )
+          .join("");
+        document.getElementById("budget-breakdown").innerHTML = budgetHTML;
+        document.getElementById("total-budget").textContent = project.goal;
+
+        // Update timeline
+        const timelineHTML = project.timeline
+          .map(
+            (item, index) => `
+                <div class="timeline-item flex gap-4" style="transition-delay: ${
+                  index * 0.1
+                }s">
+                    <div class="flex flex-col items-center">
+                        <div class="${
+                          item.isLast ? "w-4 h-4" : "timeline-dot w-4 h-4"
+                        } bg-${item.color}-500 rounded-full"></div>
+                        ${
+                          !item.isLast
+                            ? `<div class="w-1 h-full bg-${item.color}-200"></div>`
+                            : ""
+                        }
+                    </div>
+                    <div class="${item.isLast ? "" : "pb-8"} flex-1">
+                        <div class="bg-${
+                          item.color
+                        }-50 p-4 rounded-xl border-r-4 border-${
+              item.color
+            }-500">
+                            <div class="font-bold text-${
+                              item.color
+                            }-800 mb-1">${item.title}</div>
+                            <div class="text-sm text-gray-600 mb-2">${
+                              item.date
+                            }</div>
+                            <div class="text-gray-700">${item.desc}</div>
+                        </div>
+                    </div>
+                </div>
+            `
+          )
+          .join("");
+        document.getElementById("timeline-container").innerHTML = timelineHTML;
+
+        // Update progress card
+        document.getElementById("progress-percent").dataset.target =
+          project.progress;
+        document.getElementById("raised-amount").textContent = project.raised;
+        document.getElementById(
+          "goal-text"
+        ).textContent = `الهدف: ${project.goal}`;
+
+        const remaining = calculateRemaining(project.raised, project.goal);
+        document.getElementById(
+          "remaining-text"
+        ).textContent = `المتبقي: ${remaining}`;
+
+        const progressBar = document.getElementById("progress-bar");
+        progressBar.style.width = project.progress + "%";
+        progressBar.className = `progress-fill h-full rounded-full bg-gradient-to-r from-${project.statusColor}-500 via-${project.statusColor}-600 to-${project.statusColor}-700`;
+
+        const achievementCard = document.getElementById("achievement-card");
+        achievementCard.className = `achievement relative bg-gradient-to-br from-${project.statusColor}-500 to-${project.statusColor}-600 text-white p-6 rounded-xl mb-6`;
+
+        // Update donors
+        const donorsHTML = project.donors
+          .map((donor, index) => {
+            const medal =
+              donor.rank === 1
+                ? "👑"
+                : donor.rank === 2
+                ? "🥈"
+                : donor.rank === 3
+                ? "🥉"
+                : "";
+            const bgClass =
+              donor.rank === 1
+                ? "bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-200"
+                : donor.rank === 3
+                ? "bg-orange-50"
+                : "bg-gray-50";
+            const badgeClass =
+              donor.rank <= 3
+                ? "bg-gradient-to-br from-yellow-400 to-orange-500"
+                : donor.rank === 4
+                ? "bg-gradient-to-br from-gray-300 to-gray-400"
+                : "bg-teal-100";
+            const textClass =
+              donor.rank <= 3
+                ? "text-white font-bold text-lg"
+                : donor.rank === 4
+                ? "text-white font-bold text-lg"
+                : "text-teal-600 font-bold";
+            const sizeClass = donor.rank <= 3 ? "w-12 h-12" : "w-10 h-10";
+
+            return `
+                    <div class="donor-card flex items-center gap-3 p-3 ${bgClass} rounded-xl" style="transition-delay: ${
+              index * 0.1
+            }s">
+                        <div class="${sizeClass} ${badgeClass} rounded-full flex items-center justify-center ${textClass} shadow-lg">
+                            ${donor.rank}
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold text-gray-800">${
+                              donor.name
+                            }</div>
+                            <div class="text-sm text-${
+                              project.statusColor
+                            }-600 font-bold">${donor.amount}</div>
+                        </div>
+                        ${medal ? `<div class="text-2xl">${medal}</div>` : ""}
+                    </div>
+                `;
+          })
+          .join("");
+        document.getElementById("donors-list").innerHTML = donorsHTML;
+        document.getElementById(
+          "view-all-donors"
+        ).textContent = `عرض جميع المتبرعين (${project.donors})`;
+
+        // Update page title
+        document.title = `${project.title} - مبادرة إعمار غزة`;
+      }
+
+      function calculateRemaining(raised, goal) {
+        const raisedNum =
+          parseFloat(raised.replace(/[$MK]/g, "")) *
+          (raised.includes("M") ? 1000 : 1);
+        const goalNum =
+          parseFloat(goal.replace(/[$MK]/g, "")) *
+          (goal.includes("M") ? 1000 : 1);
+        const remaining = goalNum - raisedNum;
+
+        if (remaining >= 1000) {
+          return "$" + (remaining / 1000).toFixed(1) + "M";
+        }
+        return "$" + remaining + "K";
+      }
+
+      function animateCounter(element) {
+        const target = parseFloat(element.dataset.target);
+        const suffix = element.dataset.suffix || "";
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+
+        const updateCounter = () => {
+          current += increment;
+          if (current < target) {
+            element.textContent = Math.floor(current);
+            requestAnimationFrame(updateCounter);
+          } else {
+            element.textContent = target;
+            if (suffix) {
+              element.textContent += suffix;
+            }
+          }
+        };
+        updateCounter();
+      }
+
+      const observerOptions = {
+        threshold: 0.2,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+
+            const counters = entry.target.querySelectorAll(".counter");
+            counters.forEach((counter) => {
+              if (!counter.classList.contains("animated")) {
+                counter.classList.add("animated");
+                animateCounter(counter);
+              }
+            });
+
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.addEventListener("DOMContentLoaded", () => {
+        loadProjectData();
+
+        setTimeout(() => {
+          document
+            .querySelectorAll(
+              ".stat-card, .budget-item, .donor-card, .timeline-item"
+            )
+            .forEach((el) => {
+              observer.observe(el);
+            });
+
+          // Observe scroll animation elements
+          const scrollAnimatedElements = document.querySelectorAll(
+            ".scroll-fade-in, .scroll-slide-right, .scroll-slide-left, .scroll-zoom-in"
+          );
+          scrollAnimatedElements.forEach((el) => observer.observe(el));
+        }, 100);
+      });
+
+      document.querySelectorAll(".share-btn").forEach((button) => {
+        button.addEventListener("click", function (e) {
+          const ripple = document.createElement("span");
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+
+          ripple.style.width = ripple.style.height = size + "px";
+          ripple.style.left = x + "px";
+          ripple.style.top = y + "px";
+          ripple.classList.add("ripple");
+
+          this.appendChild(ripple);
+
+          setTimeout(() => ripple.remove(), 600);
+        });
+      });
+
+      // Mobile menu toggle
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const menuIcon = document.getElementById("menu-icon");
+      const closeIcon = document.getElementById("close-icon");
+
+      if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener("click", () => {
+          mobileMenu.classList.toggle("hidden");
+          menuIcon.classList.toggle("hidden");
+          closeIcon.classList.toggle("hidden");
+        });
+      }
+    </script>
+  </body>
+</html>

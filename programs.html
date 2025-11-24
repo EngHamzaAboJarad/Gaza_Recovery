@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Programs - Gaza Recovery Initiative</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/logo.png" />
+    <link rel="shortcut icon" href="assets/logo.png" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap");
+
+      * {
+        font-family: "Cairo", sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Program Cards Animation */
+      .program-card {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .program-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .program-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 50px rgba(20, 184, 166, 0.3);
+      }
+
+      /* Icon Animation */
+      .icon-float {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      /* Progress Bar Animation */
+      .progress-bar {
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .program-card.visible .progress-bar {
+        transform: scaleX(1);
+      }
+
+      /* Scroll Animations */
+      .scroll-fade-in {
+        opacity: 0;
+        transition: opacity 0.8s ease-out;
+      }
+
+      .scroll-fade-in.visible {
+        opacity: 1;
+      }
+
+      .scroll-slide-up {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .scroll-slide-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Stats Counter */
+      .stat-item {
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .stat-item.visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* Hero Background Pattern */
+      .pattern-dots {
+        background-image: radial-gradient(
+          circle,
+          rgba(20, 184, 166, 0.1) 1px,
+          transparent 1px
+        );
+        background-size: 20px 20px;
+      }
+
+      /* Nav dropdown styles */
+      .nav-dropdown {
+        position: fixed;
+        top: 5rem;
+        left: 0;
+        right: 0;
+        width: 100%;
+        transform: translateY(-10px);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        z-index: 40;
+      }
+
+      .nav-item:hover .nav-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .nav-item:hover .nav-dropdown,
+      .nav-dropdown:hover {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      @media (max-width: 1023px) {
+        .nav-dropdown {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav
+      id="navbar"
+      class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-md transition-all duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <!-- Logo -->
+          <div class="flex-shrink-0">
+            <a
+              href="index.html"
+              class="inline-flex items-center gap-3 hover:opacity-80 transition-all duration-300 group"
+            >
+              <div class="relative overflow-hidden rounded-full">
+                <img
+                  src="assets/logo.png"
+                  alt="Gaza Recovery Logo"
+                  class="h-12 w-auto drop-shadow-lg transition-all duration-300 group-hover:scale-110 mix-blend-multiply"
+                />
+              </div>
+              <span
+                class="text-lg font-bold bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent"
+                >مبادرة إعمار غزة</span
+              >
+            </a>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden lg:flex lg:items-center lg:space-x-2">
+            <div class="nav-item relative">
+              <a
+                href="index.html"
+                class="nav-link text-gray-700 hover:text-teal-600 transition-colors px-4 py-2 text-sm font-medium rounded-lg hover:bg-teal-50"
+                >الرئيسية</a
+              >
+            </div>
+            <div class="nav-item relative">
+              <a
+                href="programs.html"
+                class="nav-link text-teal-600 font-bold px-4 py-2 text-sm rounded-lg bg-teal-50"
+                >البرامج</a
+              >
+            </div>
+            <div class="nav-item relative">
+              <a
+                href="index.html#impact"
+                class="nav-link text-gray-700 hover:text-teal-600 transition-colors px-4 py-2 text-sm font-medium rounded-lg hover:bg-teal-50"
+                >التأثير</a
+              >
+            </div>
+            <div class="nav-item relative">
+              <a
+                href="index.html#contact"
+                class="nav-link text-gray-700 hover:text-teal-600 transition-colors px-4 py-2 text-sm font-medium rounded-lg hover:bg-teal-50"
+                >اتصل بنا</a
+              >
+            </div>
+            <a
+              href="index.html#donate"
+              class="bg-gradient-to-r from-teal-500 to-emerald-600 text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all ml-4"
+              >تبرع الآن</a
+            >
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="lg:hidden">
+            <button
+              id="mobile-menu-button"
+              type="button"
+              class="text-gray-700 hover:text-teal-600 focus:outline-none p-2 rounded-lg transition-all"
+            >
+              <svg
+                class="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  id="menu-icon"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+                <path
+                  id="close-icon"
+                  class="hidden"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div
+        id="mobile-menu"
+        class="hidden lg:hidden bg-white border-t border-gray-200 shadow-lg"
+      >
+        <div class="px-4 pt-2 pb-3 space-y-1">
+          <a
+            href="index.html"
+            class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
+            >الرئيسية</a
+          >
+          <a
+            href="programs.html"
+            class="block px-4 py-3 rounded-lg text-base font-bold text-teal-600 bg-teal-50"
+            >البرامج</a
+          >
+          <a
+            href="index.html#impact"
+            class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
+            >التأثير</a
+          >
+          <a
+            href="index.html#contact"
+            class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
+            >اتصل بنا</a
+          >
+          <a
+            href="index.html#donate"
+            class="block px-4 py-3 rounded-lg text-base font-bold bg-gradient-to-r from-teal-500 to-emerald-600 text-white text-center"
+            >تبرع الآن</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      class="relative bg-gradient-to-br from-teal-500 via-teal-600 to-emerald-700 text-white py-20 overflow-hidden"
+    >
+      <div class="absolute inset-0 pattern-dots opacity-30"></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
+      ></div>
+
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <div
+            class="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-6 border border-white/30"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"
+              />
+            </svg>
+            <span class="text-sm font-semibold">Comprehensive Initiatives</span>
+          </div>
+
+          <h1
+            class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight scroll-fade-in"
+          >
+            Our Programs
+          </h1>
+          <p
+            class="text-xl sm:text-2xl mb-8 leading-relaxed opacity-90 scroll-fade-in"
+          >
+            Comprehensive initiatives designed to address the most critical
+            needs of the community
+          </p>
+
+          <!-- Quick Stats -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+            <div
+              class="stat-item bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20"
+            >
+              <div class="text-3xl font-bold">6</div>
+              <div class="text-sm opacity-90">Active Programs</div>
+            </div>
+            <div
+              class="stat-item bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20"
+              style="transition-delay: 0.1s"
+            >
+              <div class="text-3xl font-bold">10,000+</div>
+              <div class="text-sm opacity-90">Families Served</div>
+            </div>
+            <div
+              class="stat-item bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20"
+              style="transition-delay: 0.2s"
+            >
+              <div class="text-3xl font-bold">$8.5M</div>
+              <div class="text-sm opacity-90">Funds Raised</div>
+            </div>
+            <div
+              class="stat-item bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20"
+              style="transition-delay: 0.3s"
+            >
+              <div class="text-3xl font-bold">25+</div>
+              <div class="text-sm opacity-90">Partner Organizations</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Programs Grid -->
+    <section class="py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          id="programsGrid"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <!-- Programs will be loaded dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section
+      class="py-16 bg-gradient-to-br from-teal-500 to-emerald-600 text-white"
+    >
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-6">
+          Help Us Make a Difference
+        </h2>
+        <p class="text-xl mb-8 opacity-90">
+          Your support enables us to continue these vital programs and reach
+          more families in need.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="index.html#donate"
+            class="px-8 py-4 bg-white text-teal-600 rounded-full font-bold text-lg hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl"
+          >
+            Donate Now
+          </a>
+          <a
+            href="index.html#contact"
+            class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-full font-bold text-lg hover:bg-white/30 transition-all border-2 border-white/30"
+          >
+            Get Involved
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div class="flex items-center justify-center gap-3 mb-4">
+            <img
+              src="assets/logo.png"
+              alt="Gaza Recovery"
+              class="h-12 w-auto"
+            />
+            <div>
+              <h3 class="text-xl font-bold">Gaza Recovery</h3>
+              <p class="text-sm text-gray-400">مبادرة إعمار غزة</p>
+            </div>
+          </div>
+          <p class="text-gray-400 mb-6">
+            Rebuilding lives, restoring hope, and creating a better future for
+            Gaza.
+          </p>
+          <div class="flex justify-center gap-6 mb-6">
+            <a
+              href="index.html"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Home</a
+            >
+            <a
+              href="index.html#projects"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Projects</a
+            >
+            <a
+              href="index.html#donate"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Donate</a
+            >
+            <a
+              href="index.html#contact"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Contact</a
+            >
+          </div>
+          <p class="text-sm text-gray-500">
+            © 2024 Gaza Recovery Initiative. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Programs Data
+      const programsData = [
+        {
+          id: 1,
+          icon: "🏥",
+          iconBg: "from-red-100 to-pink-100",
+          iconColor: "text-red-600",
+          title: "Healthcare & Medical Aid",
+          description:
+            "Mobile clinics, medical supplies, and access to healthcare professionals for communities in need.",
+          details: [
+            "24/7 mobile medical clinics",
+            "Free medication distribution",
+            "Specialist consultations",
+            "Emergency medical response",
+          ],
+          stats: {
+            beneficiaries: "15,000+",
+            status: "Active",
+            coverage: "All Districts",
+          },
+          progress: 85,
+          color: "red",
+          link: "program-details.html?id=1",
+        },
+        {
+          id: 2,
+          icon: "🏠",
+          iconBg: "from-orange-100 to-amber-100",
+          iconColor: "text-orange-600",
+          title: "Housing Reconstruction",
+          description:
+            "Rebuilding damaged homes and providing safe, secure shelter for displaced families.",
+          details: [
+            "500+ homes rebuilt",
+            "Temporary shelter provision",
+            "Infrastructure repairs",
+            "Safe housing standards",
+          ],
+          stats: {
+            beneficiaries: "8,500+",
+            status: "Ongoing",
+            coverage: "Gaza City, Rafah",
+          },
+          progress: 78,
+          color: "orange",
+          link: "program-details.html?id=2",
+        },
+        {
+          id: 3,
+          icon: "💧",
+          iconBg: "from-blue-100 to-cyan-100",
+          iconColor: "text-blue-600",
+          title: "Clean Water & Sanitation",
+          description:
+            "Installing water systems, repairing infrastructure, and ensuring access to clean drinking water.",
+          details: [
+            "Water purification stations",
+            "Pipeline repairs & installation",
+            "Hygiene education programs",
+            "Sanitation facilities",
+          ],
+          stats: {
+            beneficiaries: "25,000+",
+            status: "Active",
+            coverage: "Multiple Districts",
+          },
+          progress: 92,
+          color: "blue",
+          link: "program-details.html?id=3",
+        },
+        {
+          id: 4,
+          icon: "📚",
+          iconBg: "from-green-100 to-emerald-100",
+          iconColor: "text-green-600",
+          title: "Education & Youth Support",
+          description:
+            "Reopening schools, providing educational materials, and supporting youth development programs.",
+          details: [
+            "School rehabilitation",
+            "Free school supplies",
+            "After-school programs",
+            "Scholarship opportunities",
+          ],
+          stats: {
+            beneficiaries: "12,000+",
+            status: "Active",
+            coverage: "35 Schools",
+          },
+          progress: 88,
+          color: "green",
+          link: "program-details.html?id=4",
+        },
+        {
+          id: 5,
+          icon: "🍎",
+          iconBg: "from-yellow-100 to-orange-100",
+          iconColor: "text-yellow-600",
+          title: "Food Security Programs",
+          description:
+            "Emergency food distribution, sustainable agriculture projects, and nutrition support.",
+          details: [
+            "Monthly food packages",
+            "Community gardens",
+            "Nutrition workshops",
+            "Agricultural training",
+          ],
+          stats: {
+            beneficiaries: "20,000+",
+            status: "Active",
+            coverage: "All Regions",
+          },
+          progress: 95,
+          color: "yellow",
+          link: "program-details.html?id=5",
+        },
+        {
+          id: 6,
+          icon: "💼",
+          iconBg: "from-purple-100 to-indigo-100",
+          iconColor: "text-purple-600",
+          title: "Livelihood & Employment",
+          description:
+            "Job training, small business support, and economic empowerment initiatives for sustainable recovery.",
+          details: [
+            "Vocational training programs",
+            "Microfinance support",
+            "Business development",
+            "Job placement services",
+          ],
+          stats: {
+            beneficiaries: "5,000+",
+            status: "Expanding",
+            coverage: "Urban Centers",
+          },
+          progress: 70,
+          color: "purple",
+          link: "program-details.html?id=6",
+        },
+      ];
+
+      // Color configurations
+      const colorConfig = {
+        red: {
+          border: "border-red-200",
+          bg: "bg-red-50",
+          text: "text-red-600",
+          progress: "bg-gradient-to-r from-red-500 to-pink-600",
+          badge: "bg-red-100 text-red-700",
+        },
+        orange: {
+          border: "border-orange-200",
+          bg: "bg-orange-50",
+          text: "text-orange-600",
+          progress: "bg-gradient-to-r from-orange-500 to-amber-600",
+          badge: "bg-orange-100 text-orange-700",
+        },
+        blue: {
+          border: "border-blue-200",
+          bg: "bg-blue-50",
+          text: "text-blue-600",
+          progress: "bg-gradient-to-r from-blue-500 to-cyan-600",
+          badge: "bg-blue-100 text-blue-700",
+        },
+        green: {
+          border: "border-green-200",
+          bg: "bg-green-50",
+          text: "text-green-600",
+          progress: "bg-gradient-to-r from-green-500 to-emerald-600",
+          badge: "bg-green-100 text-green-700",
+        },
+        yellow: {
+          border: "border-yellow-200",
+          bg: "bg-yellow-50",
+          text: "text-yellow-600",
+          progress: "bg-gradient-to-r from-yellow-500 to-orange-600",
+          badge: "bg-yellow-100 text-yellow-700",
+        },
+        purple: {
+          border: "border-purple-200",
+          bg: "bg-purple-50",
+          text: "text-purple-600",
+          progress: "bg-gradient-to-r from-purple-500 to-indigo-600",
+          badge: "bg-purple-100 text-purple-700",
+        },
+      };
+
+      // Render Programs
+      function renderPrograms() {
+        const grid = document.getElementById("programsGrid");
+
+        programsData.forEach((program, index) => {
+          const colors = colorConfig[program.color];
+
+          const card = document.createElement("div");
+          card.className = `program-card bg-white rounded-2xl shadow-lg overflow-hidden border-2 ${colors.border} hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer`;
+          card.style.transitionDelay = `${index * 0.1}s`;
+
+          card.innerHTML = `
+            <div class="p-8">
+              <!-- Icon -->
+              <div class="flex items-center gap-4 mb-6">
+                <div class="w-16 h-16 rounded-xl bg-gradient-to-br ${
+                  program.iconBg
+                } flex items-center justify-center text-3xl icon-float shadow-lg">
+                  ${program.icon}
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold text-gray-900">${
+                    program.title
+                  }</h3>
+                  <span class="inline-block mt-1 px-3 py-1 ${
+                    colors.badge
+                  } text-xs font-semibold rounded-full">
+                    ${program.stats.status}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Description -->
+              <p class="text-gray-700 mb-6 leading-relaxed">
+                ${program.description}
+              </p>
+
+              <!-- Details -->
+              <div class="space-y-2 mb-6">
+                ${program.details
+                  .map(
+                    (detail) => `
+                  <div class="flex items-start gap-2">
+                    <svg class="w-5 h-5 ${colors.text} flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="text-sm text-gray-700">${detail}</span>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+
+              <!-- Stats -->
+              <div class="grid grid-cols-2 gap-4 mb-6 p-4 ${
+                colors.bg
+              } rounded-xl">
+                <div>
+                  <div class="text-sm text-gray-600 mb-1">Beneficiaries</div>
+                  <div class="text-xl font-bold ${colors.text}">${
+            program.stats.beneficiaries
+          }</div>
+                </div>
+                <div>
+                  <div class="text-sm text-gray-600 mb-1">Coverage</div>
+                  <div class="text-sm font-semibold text-gray-900">${
+                    program.stats.coverage
+                  }</div>
+                </div>
+              </div>
+
+              <!-- Progress -->
+              <div class="mb-4">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-sm font-semibold text-gray-700">Program Progress</span>
+                  <span class="text-sm font-bold ${colors.text}">${
+            program.progress
+          }%</span>
+                </div>
+                <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                  <div class="progress-bar h-full ${
+                    colors.progress
+                  } rounded-full" style="width: ${program.progress}%"></div>
+                </div>
+              </div>
+
+              <!-- Action Button -->
+              <button onclick="event.stopPropagation(); window.location.href='index.html#donate'" class="block w-full text-center px-6 py-3 bg-gradient-to-r ${
+                colors.progress
+              } text-white rounded-lg font-semibold hover:shadow-lg transition-all transform hover:scale-105">
+                Support This Program
+              </button>
+            </div>
+          `;
+
+          // Add click event after innerHTML is set
+          card.addEventListener("click", () => {
+            window.location.href = program.link;
+          });
+
+          grid.appendChild(card);
+        });
+      }
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", () => {
+        renderPrograms();
+
+        // Observe all animated elements
+        setTimeout(() => {
+          document
+            .querySelectorAll(
+              ".program-card, .stat-item, .scroll-fade-in, .scroll-slide-up"
+            )
+            .forEach((el) => {
+              observer.observe(el);
+            });
+        }, 100);
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const menuIcon = document.getElementById("menu-icon");
+        const closeIcon = document.getElementById("close-icon");
+
+        mobileMenuButton.addEventListener("click", () => {
+          mobileMenu.classList.toggle("hidden");
+          menuIcon.classList.toggle("hidden");
+          closeIcon.classList.toggle("hidden");
+        });
+      });
+    </script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#14b8a6",
+              "primary-dark": "#0d9488",
+            },
+          },
+        },
+      };
+    </script>
+  </body>
+</html>
